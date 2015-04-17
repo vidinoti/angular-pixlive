@@ -1,0 +1,8 @@
+{
+  "name": "PixLive Demo",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-rc.3",
+    "PixLive": "vidinoti/angular-PixLive"
+  }
+}
