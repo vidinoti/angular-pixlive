@@ -18,7 +18,11 @@
   "cordovaPlugins": [
     "org.apache.cordova.device",
     "org.apache.cordova.console",
-    "com.ionic.keyboard"
+    "com.ionic.keyboard",
+    {
+      "id": "com.vidinoti.cordova.pixlive\" version=\"1.0",
+      "locator": "https://github.com/vidinoti/cordova-plugin-PixLive.git"
+    }
   ],
   "cordovaPlatforms": []
 }
