@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "homepage": "http://www.pixlive.info",
   "authors": [
-    "Vidinoti SA",
-    "Mathieu Monney <mathieu.monney@vidinoti.com>"
+    "vidinoti"
   ],
   "description": "Plugin to use PixLive Augmented Reality toolkit the Angular way",
   "main": "PixLive.js",
