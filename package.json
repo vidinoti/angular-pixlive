@@ -1,34 +1,32 @@
 {
   "name": "angular-PixLive",
   "version": "0.0.1",
-  "homepage": "http://www.pixlive.info",
-  "authors": [
-    "vidinoti"
-  ],
   "description": "Plugin to use PixLive Augmented Reality toolkit the Angular way",
   "main": "js/PixLive.bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vidinoti/angular-PixLive.git"
+  },
   "keywords": [
     "augmented",
     "reality",
     "angular"
   ],
+  "author": "Vidinoti - http://www.vidinoti.com",
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular": "~1.3.13"
+  "bugs": {
+    "url": "http://www.vidinoti.com/contact.php"
   },
+  "homepage": "http://pixlive.info",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-concat": "~0.5.1",
     "grunt-contrib-uglify": "~0.9.1",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-contrib-cssmin": "~0.12.2",
-    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-clean": "~0.6.0"
   }
 }
