@@ -18,6 +18,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
+
+    if(window.cordova && window.cordova.plugins) {
+      //Init PixLive SDK
+      cordova.plugins.PixLive.init(cordova.file.dataDirectory+'pixliveData','<My License ID>');
+    }
   });
 })
 
