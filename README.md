@@ -16,12 +16,12 @@ Plugin for using PixLive SDK in Ionic framework.
   `<script src="lib/angular-PixLive/js/PixLive.bundle.js"></script>` 
 * Add the PixLive SDK init call in your app.js: 
 
-  ``
+  ```
 if(window.cordova && window.cordova.plugins) {
   //Init PixLive SDK
   cordova.plugins.PixLive.init(cordova.file.dataDirectory+'pixliveData','<My License ID>');
 }
-  ``
+  ```
 * Add an Augmented Reality view in one of your Ionic views. Note that content inserted within the view is display on platforms where the SDK is not available:
   
   ```
