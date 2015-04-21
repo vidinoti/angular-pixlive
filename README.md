@@ -1,2 +1,2 @@
-# angular-plugin-PixLive
-Plugin for using PixLive in the Angular way
+# angular-pixlive
+Plugin for using PixLive, the Angular way.

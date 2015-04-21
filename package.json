@@ -1,5 +1,5 @@
 {
-  "name": "angular-PixLive",
+  "name": "angular-pixlive",
   "version": "0.0.1",
   "description": "Plugin to use PixLive Augmented Reality toolkit the Angular way",
   "main": "js/PixLive.bundle.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vidinoti/angular-PixLive.git"
+    "url": "https://github.com/vidinoti/angular-pixlive.git"
   },
   "keywords": [
     "augmented",

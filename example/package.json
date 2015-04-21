@@ -8,7 +8,7 @@
     "gulp-concat": "^2.2.0",
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
-    "angular-PixLive": "vidinoti/angular-PixLive"
+    "angular-pixlive": "vidinoti/angular-pixlive"
   },
   "devDependencies": {
     "bower": "^1.3.3",
