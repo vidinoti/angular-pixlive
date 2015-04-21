@@ -10,7 +10,8 @@ angular.module('pixlive', [])
     .directive('pxlView', [
         '$timeout',
         '$ionicPosition',
-        function($timeout, $ionicPosition) {
+        '$ionicPlatform',
+        function($timeout, $ionicPosition, $ionicPlatform) {
             return {
                 restrict: 'E',
                 require: '^?ionNavView',
@@ -45,21 +46,23 @@ angular.module('pixlive', [])
 
                         $scope.$on("$ionicView.afterEnter", function(scopes, states) {
                             if (!$scope.arView) {
-                                if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
-                                    //We remove all element content
-                                    element.children().remove();
+                                $ionicPlatform.ready(function () {
+                                    if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                                        //We remove all element content
+                                        element.children().remove();
 
-                                    $scope.pixliveTimeout = $timeout(function() {
-                                        var offset = $ionicPosition.offset($element);
+                                        $scope.pixliveTimeout = $timeout(function() {
+                                            var offset = $ionicPosition.offset($element);
 
-                                        var y = offset.top;
-                                        var x = offset.left;
-                                        var width = offset.width;
-                                        var height = offset.height;
-                                        $scope.pixliveTimeout = null;
-                                        $scope.arView = window.cordova.plugins.PixLive.createARView(x, y, width, height);
-                                    }, 300);
-                                }
+                                            var y = offset.top;
+                                            var x = offset.left;
+                                            var width = offset.width;
+                                            var height = offset.height;
+                                            $scope.pixliveTimeout = null;
+                                            $scope.arView = window.cordova.plugins.PixLive.createARView(x, y, width, height);
+                                        }, 300);
+                                    }
+                                });
                             } else {
                                 $scope.arView.afterEnter();
                             }
