@@ -1,6 +1,16 @@
 angular.module('starter.controllers', [])
 
-.controller('PixLiveCtrl', function($scope) {})
+.controller('PixLiveCtrl', function($scope, $ionicPopup, PxlRemoteController) {
+	PxlRemoteController.synchronize(['release_test']).then(function(contexts) {
+		console.log('Sync OK: ');
+		console.log(contexts);
+	}, function(reason) {
+		$ionicPopup.alert({
+	     title: 'PixLive Synchronization Error',
+	     template: reason
+	   });
+	});
+})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   $scope.chats = Chats.all();

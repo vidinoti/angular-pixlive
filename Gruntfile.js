@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 
             },
             dist: {
-                src: ['js/Pixlive.js'],
+                src: ['js/_declaration.js','js/Pixlive.js','js/RemoteController.js'],
                 dest: 'js/PixLive.bundle.js'
             }
         },
