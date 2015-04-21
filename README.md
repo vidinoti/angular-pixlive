@@ -14,7 +14,12 @@ Plugin for using PixLive SDK in Ionic framework.
 * Add JS Bundle file in you index.html: 
   
   `<script src="lib/angular-PixLive/js/PixLive.bundle.js"></script>` 
-* Add the PixLive SDK init call in your app.js: 
+* Add the `pixlive` angular module to be loaded with your app. It should like similar to:
+  
+  ```
+angular.module('myApp', ['ionic', 'myApp.controllers', 'myApp.services', 'pixlive'])
+  ```
+* Add the PixLive SDK init call in your app.js, in the init part: 
 
   ```
 if(window.cordova && window.cordova.plugins) {
