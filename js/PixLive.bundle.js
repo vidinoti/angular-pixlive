@@ -50,7 +50,9 @@ angular.module('pixlive', [])
                                     if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
                                         //We remove all element content
                                         element.children().remove();
-
+                                                     
+                                        //FIXME: The timeout is a Dirty hack as on iOS, the status bar CSS style is applied after 
+                                        //       this directive is loaded, hence we fail to get the proper Y value for the view.
                                         $scope.pixliveTimeout = $timeout(function() {
                                             var offset = $ionicPosition.offset($element);
 
@@ -60,10 +62,25 @@ angular.module('pixlive', [])
                                             var height = offset.height;
                                             $scope.pixliveTimeout = null;
                                             $scope.arView = window.cordova.plugins.PixLive.createARView(x, y, width, height);
+                                            
+                                            $scope.onResize = function() {
+                                                var offset = $ionicPosition.offset($element);
+
+                                                var y = offset.top;
+                                                var x = offset.left;
+                                                var width = offset.width;
+                                                var height = offset.height;
+
+                                                $scope.arView.resize(x,y,width,height);
+                                            }; 
+
+                                            ionic.on('resize',$scope.onResize ,window);
+
                                         }, 300);
                                     }
                                 });
                             } else {
+                                $scope.onResize();
                                 $scope.arView.afterEnter();
                             }
 
@@ -93,6 +110,7 @@ angular.module('pixlive', [])
                                 $scope.pixliveTimeout = null;
                             }
                             if ($scope.arView) {
+                                ionic.off('resize',$scope.onResize ,window);
                                 $scope.arView.destroy();
                             }
                         });
