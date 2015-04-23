@@ -1,7 +1,7 @@
 # angular-pixlive
 Plugin for using PixLive SDK in Ionic framework.
 
-## Usage
+## Using the AR View
 
 * Add the plugin to your Ionic project: 
   
@@ -38,3 +38,24 @@ if(window.cordova && window.cordova.plugins) {
   </pxl-view>
 </ion-view>
   ```
+
+## AR Model / Context Synchronization
+
+The plugin exposes a `PxlRemoteController` service allowing you to request synchronizations of the contexts / AR Models. This can be done anywhere in your controllers or at app launch time. The plugin make sure that everything is ready before issuing the call so it's safe to use it anywhere.
+
+Example of usage:
+
+```
+myApp.controller('PixLiveCtrl', function($scope, $ionicLoading, $compile, PxlRemoteController, $ionicPopup) {
+    // Trigger a synchronization with the tag test, pass an empty array to synchronize with all the contexts.
+    PxlRemoteController.synchronize(['test']).then(function(contexts) {
+        console.log('Syncronization OK: ');
+        console.log(contexts);
+    }, function(reason) {
+        $ionicPopup.alert({
+            title: 'PixLive Synchronization Error',
+            template: reason
+        });
+    });
+});
+```
