@@ -6,7 +6,7 @@
 
 'use strict';
 
-angular.module('pixlive', []);
+var pixliveModule = angular.module('pixlive', []);
 /*
  * angular-pixlive v0.0.1
  * (c) 2015 Vidinoti http://vidinoti.com
@@ -15,7 +15,7 @@ angular.module('pixlive', []);
 
 'use strict';
 
-angular.module('pixlive', [])
+pixliveModule
     .directive('pxlView', [
         '$timeout',
         '$ionicPosition',
@@ -144,7 +144,7 @@ angular.module('pixlive', [])
 
 'use strict';
 
-angular.module('pixlive', [])
+pixliveModule
     .factory('PxlRemoteController', [
         '$timeout',
         '$ionicPlatform',

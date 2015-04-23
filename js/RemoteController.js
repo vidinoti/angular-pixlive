@@ -9,7 +9,7 @@
 
 'use strict';
 
-angular.module('pixlive', [])
+pixliveModule
     .factory('PxlRemoteController', [
         '$timeout',
         '$ionicPlatform',

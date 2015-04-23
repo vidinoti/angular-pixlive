@@ -6,4 +6,4 @@
 
 'use strict';
 
-angular.module('pixlive', []);
+var pixliveModule = angular.module('pixlive', []);

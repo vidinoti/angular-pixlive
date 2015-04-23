@@ -6,7 +6,7 @@
 
 'use strict';
 
-angular.module('pixlive', [])
+pixliveModule
     .directive('pxlView', [
         '$timeout',
         '$ionicPosition',
