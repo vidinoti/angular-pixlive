@@ -16,20 +16,21 @@ Plugin for using PixLive SDK in Ionic framework.
   `<script src="lib/angular-PixLive/js/PixLive.bundle.js"></script>` 
 * Add the `pixlive` angular module to be loaded with your app. It should like similar to:
   
-  ```
+  ```js
 angular.module('myApp', ['ionic', 'myApp.controllers', 'myApp.services', 'pixlive'])
   ```
 * Add the PixLive SDK init call in your app.js, in the init part: 
 
-  ```
+  ```js
 if(window.cordova && window.cordova.plugins) {
   //Init PixLive SDK
   cordova.plugins.PixLive.init(cordova.file.dataDirectory+'pixliveData','<My License ID>');
 }
   ```
+  
 * Add an Augmented Reality view in one of your Ionic views. Note that content inserted within the view is display on platforms where the SDK is not available:
   
-  ```
+  ```html
 <ion-view view-title="PixLive">
   <pxl-view>
     <div class="row row-center" style="height: 100%;">
@@ -45,7 +46,7 @@ The plugin exposes a `PxlRemoteController` service allowing you to request synch
 
 Example of usage:
 
-```
+```js
 myApp.controller('PixLiveCtrl', function($scope, $ionicLoading, $compile, PxlRemoteController, $ionicPopup) {
     // Trigger a synchronization with the tag test, pass an empty array to synchronize with all the contexts.
     PxlRemoteController.synchronize(['test']).then(function(contexts) {
