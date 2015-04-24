@@ -31,7 +31,7 @@ if(window.cordova && window.cordova.plugins) {
 * Add an Augmented Reality view in one of your Ionic views. Note that content inserted within the view is display on platforms where the SDK is not available:
   
   ```html
-<ion-view view-title="PixLive">
+<ion-view view-title="PixLive" style="background-color: transparent !important;">
   <pxl-view>
     <div class="row row-center" style="height: 100%;">
         <div class="col" style="text-align: center"><img src="http://www.vidinoti.com/images/logo.png" style="max-width: 100%"></div>
@@ -39,6 +39,8 @@ if(window.cordova && window.cordova.plugins) {
   </pxl-view>
 </ion-view>
   ```
+
+**Warning**: The camera view is inserted **below** your app. Therefore you need to make to have your view transparent where the camera should appear. As above, put the background color to transparent on your ion-view as well as on your ion-tabs, if any.
 
 ## AR Model / Context Synchronization
 
