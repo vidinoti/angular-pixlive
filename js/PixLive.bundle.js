@@ -20,7 +20,8 @@ pixliveModule
         '$timeout',
         '$ionicPosition',
         '$ionicPlatform',
-        function($timeout, $ionicPosition, $ionicPlatform) {
+        '$ionicBackdrop',
+        function($timeout, $ionicPosition, $ionicPlatform, $ionicBackdrop) {
             return {
                 restrict: 'E',
                 require: '^?ionNavView',
@@ -55,11 +56,11 @@ pixliveModule
 
                         $scope.$on("$ionicView.afterEnter", function(scopes, states) {
                             if (!$scope.arView) {
-                                $ionicPlatform.ready(function () {
-                                    if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                                $ionicPlatform.ready(function() {
+                                    if (window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
                                         //We remove all element content
                                         element.children().remove();
-                                                     
+
                                         //FIXME: The timeout is a Dirty hack as on iOS, the status bar CSS style is applied after 
                                         //       this directive is loaded, hence we fail to get the proper Y value for the view.
                                         $scope.pixliveTimeout = $timeout(function() {
@@ -70,8 +71,12 @@ pixliveModule
                                             var width = offset.width;
                                             var height = offset.height;
                                             $scope.pixliveTimeout = null;
-                                            $scope.arView = window.cordova.plugins.PixLive.createARView(x, y, width, height);
-                                            
+                                            $scope.arView = window.cordova.plugins.PixLive.createARView(x, y, width, height, true);
+
+                                            if ($ionicBackdrop.isDisplayed() != null) {
+                                                $scope.arView.disableTouch();
+                                            }
+
                                             $scope.onResize = function() {
                                                 var offset = $ionicPosition.offset($element);
 
@@ -80,10 +85,20 @@ pixliveModule
                                                 var width = offset.width;
                                                 var height = offset.height;
 
-                                                $scope.arView.resize(x,y,width,height);
-                                            }; 
+                                                $scope.arView.resize(x, y, width, height);
+                                            };
 
-                                            ionic.on('resize',$scope.onResize ,window);
+                                            $scope.onModalShown = function() {
+                                                $scope.arView.disableTouch();
+                                            };
+
+                                            $scope.onModalHidden = function() {
+                                                $scope.arView.enableTouch();
+                                            };
+
+                                            ionic.on('resize', $scope.onResize, window);
+                                            ionic.on('backdrop.shown', $scope.onModalShown, window);
+                                            ionic.on('backdrop.hidden', $scope.onModalHidden, window);
 
                                         }, 300);
                                     }
@@ -119,8 +134,16 @@ pixliveModule
                                 $scope.pixliveTimeout = null;
                             }
                             if ($scope.arView) {
-                                ionic.off('resize',$scope.onResize ,window);
+                                ionic.off('resize', $scope.onResize, window);
                                 $scope.arView.destroy();
+                            }
+                            if ($scope.onModalShown) {
+                                ionic.off('backdrop.shown', $scope.onModalShown, window);
+                                $scope.onModalShown = null;
+                            }
+                            if ($scope.onModalHidden) {
+                                ionic.off('backdrop.hidden', $scope.onModalHidden, window);
+                                $scope.onModalHidden = null;
                             }
                         });
                     }
@@ -131,6 +154,60 @@ pixliveModule
                     };
                 }
             };
+        }
+    ])
+    .config(["$provide",
+        function($provide) {
+            // Use the `decorator` solution to substitute or attach behaviors to
+            // original service instance; @see angular-mocks for more examples....
+
+            $provide.decorator('$ionicBackdrop', ["$delegate",
+                function($delegate) {
+                    // Save the original $log.retain()
+                    var retainFn = $delegate.retain;
+                    var releaseFn = $delegate.release;
+
+                    $delegate.backdropHolds = 0;
+
+                    $delegate.retain = function() {
+                        var args = [].slice.call(arguments);
+
+                        // Call the original with the output prepended with formatted timestamp
+                        retainFn.apply(null, args)
+
+                        $delegate.backdropHolds++;
+
+                        //Call the disable 
+                        if ($delegate.backdropHolds == 1) {
+                            ionic.trigger('backdrop.shown', {
+                                target: window
+                            });
+                        }
+                    };
+
+                    $delegate.release = function() {
+                        var args = [].slice.call(arguments);
+
+                        // Call the original with the output prepended with formatted timestamp
+                        releaseFn.apply(null, args)
+
+                        $delegate.backdropHolds--;
+
+                        //Call the disable 
+                        if ($delegate.backdropHolds == 0) {
+                            ionic.trigger('backdrop.hidden', {
+                                target: window
+                            });
+                        }
+                    };
+
+                    $delegate.isDisplayed = function() {
+                        return $delegate.backdropHolds>0;
+                    }
+
+                    return $delegate;
+                }
+            ]);
         }
     ]);
 /*
