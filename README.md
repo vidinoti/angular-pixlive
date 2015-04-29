@@ -62,3 +62,23 @@ myApp.controller('PixLiveCtrl', function($scope, $ionicLoading, $compile, PxlRem
     });
 });
 ```
+
+## Events
+
+The following directives can be used **as attribute** on any elements to get the associated events from the PixLive SD:
+
+* pxlContextEnter
+* pxlContextExit
+* pxlCodeRecognize
+
+It can be used for example as follow in your HTML template:
+
+```
+<ion-view view-title="AR"  style="background-color: transparent !important;">
+  <pxl-view pxl-context-enter="contextEnter">
+    
+  </pxl-view>
+</ion-view>
+```
+
+This will call the `contextEnter` on the controller linked with the view when an image or a iBeacon is detected.
