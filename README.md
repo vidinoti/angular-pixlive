@@ -13,7 +13,7 @@ Plugin for using PixLive SDK in Ionic framework.
   where the paths corresponds to the location for iOS and Android of the framework and libs.
 * Add JS Bundle file in you index.html: 
   
-  `<script src="lib/angular-PixLive/js/PixLive.bundle.js"></script>` 
+  `<script src="lib/angular-pixlive/js/PixLive.bundle.js"></script>` 
 * Add the `pixlive` angular module to be loaded with your app. It should like similar to:
   
   ```js
