@@ -28,14 +28,12 @@ if(window.cordova && window.cordova.plugins) {
 }
   ```
   
-* Add an Augmented Reality view in one of your Ionic views. Note that content inserted within the view is display on platforms where the SDK is not available:
+* Add an Augmented Reality view in one of your Ionic views. Note that content inserted within the view will be displayed on top of the AR camera view.
   
   ```html
 <ion-view view-title="PixLive" style="background-color: transparent !important;">
   <pxl-view>
-    <div class="row row-center" style="height: 100%;">
-        <div class="col" style="text-align: center"><img src="http://www.vidinoti.com/images/logo.png" style="max-width: 100%"></div>
-    </div>
+
   </pxl-view>
 </ion-view>
   ```

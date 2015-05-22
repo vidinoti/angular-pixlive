@@ -58,8 +58,6 @@ pixliveModule
                             if (!$scope.arView) {
                                 $ionicPlatform.ready(function() {
                                     if (window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
-                                        //We remove all element content
-                                        element.children().remove();
 
                                         //FIXME: The timeout is a Dirty hack as on iOS, the status bar CSS style is applied after 
                                         //       this directive is loaded, hence we fail to get the proper Y value for the view.
