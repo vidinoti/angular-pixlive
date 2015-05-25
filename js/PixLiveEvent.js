@@ -54,9 +54,8 @@ pixliveModule
         });
     }])
     .directive('pxlContextEnter', [
-        '$timeout',
         'PxlEventService',
-        function($timeout, PxlEventService) {
+        function(PxlEventService) {
             return {
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
@@ -73,9 +72,8 @@ pixliveModule
         }
     ])
     .directive('pxlContextExit', [
-        '$timeout',
         'PxlEventService',
-        function($timeout, PxlEventService) {
+        function(PxlEventService) {
             return {
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
@@ -92,9 +90,8 @@ pixliveModule
         }
     ])
     .directive('pxlCodeRecognize', [
-        '$timeout',
         'PxlEventService',
-        function($timeout, PxlEventService) {
+        function(PxlEventService) {
             return {
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
@@ -105,6 +102,40 @@ pixliveModule
                     PxlEventService.addListener('codeRecognize',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('codeRecognize',listener);
+                    });
+                }
+            };
+        }
+    ]).directive('pxlAnnotationsPresent', [
+        'PxlEventService',
+        function(PxlEventService) {
+            return {
+                link: function(scope, element, attrs) {
+                    var listener = function(event) {
+                        scope.$apply(function(self) {
+                            self[attrs.pxlAnnotationsPresent](event.code);
+                        });
+                    }
+                    PxlEventService.addListener('presentAnnotations',listener);
+                    element.bind('$destroy', function() {
+                        PxlEventService.removeListener('presentAnnotations',listener);
+                    });
+                }
+            };
+        }
+    ]).directive('pxlAnnotationsHide', [
+        'PxlEventService',
+        function(PxlEventService) {
+            return {
+                link: function(scope, element, attrs) {
+                    var listener = function(event) {
+                        scope.$apply(function(self) {
+                            self[attrs.pxlAnnotationsHide](event.code);
+                        });
+                    }
+                    PxlEventService.addListener('hideAnnotations',listener);
+                    element.bind('$destroy', function() {
+                        PxlEventService.removeListener('hideAnnotations',listener);
                     });
                 }
             };

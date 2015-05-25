@@ -6,11 +6,11 @@ Plugin for using PixLive SDK in Ionic framework.
 * Add the plugin to your Ionic project: 
   
   `ionic add vidinoti/angular-pixlive`
-* Add the Cordova plugin for PixLive SDK to your Ionic project. This has to be done **after** having added the different platforms you use: 
+* Add the Cordova plugin for PixLive SDK to your Ionic project:
   
-  `ionic plugin add com.vidinoti.cordova.pixlive --variable PIXLIVE_SDK_IOS_LOCATION=\"/home/PixLiveSDKiOS/VDARSDK.framework\" --variable PIXLIVE_SDK_ANDROID_LOCATION=\"/home/PixLiveSDKAndroid/lib\"`
+  `ionic plugin add cordova-plugin-pixlive --variable PIXLIVE_SDK_IOS_LOCATION=\"/home/PixLiveSDKiOS/VDARSDK.framework\" --variable PIXLIVE_SDK_ANDROID_LOCATION=\"/home/PixLiveSDKAndroid/vdarsdk-release.aar\"`
   
-  where the paths corresponds to the location for iOS and Android of the framework and libs.
+  where the paths corresponds to the location for iOS and Android of the framework and AAR files.
 * Add JS Bundle file in you index.html: 
   
   `<script src="lib/angular-pixlive/js/PixLive.bundle.js"></script>` 
@@ -68,6 +68,8 @@ The following directives can be used **as attribute** on any elements to get the
 * pxlContextEnter
 * pxlContextExit
 * pxlCodeRecognize
+* pxlAnnotationsPresent
+* pxlAnnotationsHide
 
 It can be used for example as follow in your HTML template:
 

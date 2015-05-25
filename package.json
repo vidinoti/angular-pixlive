@@ -1,6 +1,6 @@
 {
   "name": "angular-pixlive",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Plugin to use PixLive Augmented Reality toolkit the Angular way",
   "main": "js/PixLive.bundle.js",
   "scripts": {
@@ -13,7 +13,8 @@
   "keywords": [
     "augmented",
     "reality",
-    "angular"
+    "angular",
+    "pixlive"
   ],
   "author": "Vidinoti - http://www.vidinoti.com",
   "license": "MIT",
