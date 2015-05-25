@@ -16,7 +16,10 @@
     "angular",
     "pixlive"
   ],
-  "author": "Vidinoti - http://www.vidinoti.com",
+  "author": {
+    "name": "Vidinoti",
+    "email": "support@vidinoti.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "http://www.vidinoti.com/contact.php"
@@ -31,3 +34,4 @@
     "grunt-contrib-clean": "~0.6.0"
   }
 }
+
