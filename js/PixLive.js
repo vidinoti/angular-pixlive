@@ -62,7 +62,7 @@ pixliveModule
                                             $scope.pixliveTimeout = null;
                                             $scope.arView = window.cordova.plugins.PixLive.createARView(x, y, width, height, true);
 
-                                            if ($ionicBackdrop.isDisplayed() != null) {
+                                            if ($ionicBackdrop.isDisplayed() != false) {
                                                 $scope.arView.disableTouch();
                                             }
 
