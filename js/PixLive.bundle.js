@@ -73,6 +73,8 @@ pixliveModule
 
                                             if ($ionicBackdrop.isDisplayed() != false) {
                                                 $scope.arView.disableTouch();
+                                            } else {
+                                                $scope.arView.enableTouch();
                                             }
 
                                             $scope.onResize = function() {
