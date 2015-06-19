@@ -3,31 +3,31 @@
  * (c) 2015 Vidinoti http://vidinoti.com
  * License: MIT
  * 
- * Remote Controller
+ * SDK Controller
  *
  */
 
 'use strict';
 
 pixliveModule
-    .factory('PxlRemoteController', [
+    .factory('PxlController', [
         '$ionicPlatform',
         '$q',
-        function PxlRemoteController($ionicPlatform, $q) {
+        function PxlController($ionicPlatform, $q) {
 
             /*private*/
 
             /*public*/
             return {
-                synchronize: function(tags) {
+                presentNotificationsList: function() {
                     var deferred = $q.defer();
-                    
+
                     $ionicPlatform.ready(function () {
                         if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
-                            window.cordova.plugins.PixLive.synchronize(tags, function(contexts) {
-                                deferred.resolve(contexts);
-                            }, function(reason) {
-                                deferred.reject(reason);
+                            window.cordova.plugins.PixLive.presentNotificationsList(function() {
+                                deferred.resolve();
+                            }, function() {
+                                deferred.reject();
                             });
                         } else {
                             deferred.resolve([]);

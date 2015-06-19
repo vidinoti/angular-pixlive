@@ -140,5 +140,22 @@ pixliveModule
                 }
             };
         }
+    ]).directive('pxlSynchronizationRequired', [
+        'PxlEventService',
+        function(PxlEventService) {
+            return {
+                link: function(scope, element, attrs) {
+                    var listener = function(event) {
+                        scope.$apply(function(self) {
+                            self[attrs.pxlSynchronizationRequired](event.code);
+                        });
+                    }
+                    PxlEventService.addListener('requireSync',listener);
+                    element.bind('$destroy', function() {
+                        PxlEventService.removeListener('requireSync',listener);
+                    });
+                }
+            };
+        }
     ])
     ;

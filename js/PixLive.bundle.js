@@ -223,10 +223,9 @@ pixliveModule
 
 pixliveModule
     .factory('PxlRemoteController', [
-        '$timeout',
         '$ionicPlatform',
         '$q',
-        function PxlRemoteController($timeout, $ionicPlatform, $q) {
+        function PxlRemoteController($ionicPlatform, $q) {
 
             /*private*/
 
@@ -390,6 +389,23 @@ pixliveModule
                     PxlEventService.addListener('hideAnnotations',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('hideAnnotations',listener);
+                    });
+                }
+            };
+        }
+    ]).directive('pxlSynchronizationRequired', [
+        'PxlEventService',
+        function(PxlEventService) {
+            return {
+                link: function(scope, element, attrs) {
+                    var listener = function(event) {
+                        scope.$apply(function(self) {
+                            self[attrs.pxlAnnotationsHide](event.code);
+                        });
+                    }
+                    PxlEventService.addListener('requireSync',listener);
+                    element.bind('$destroy', function() {
+                        PxlEventService.removeListener('requireSync',listener);
                     });
                 }
             };
