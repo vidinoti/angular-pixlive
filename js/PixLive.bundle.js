@@ -400,7 +400,7 @@ pixliveModule
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
                         scope.$apply(function(self) {
-                            self[attrs.pxlAnnotationsHide](event.code);
+                            self[attrs.pxlSynchronizationRequired](event.code);
                         });
                     }
                     PxlEventService.addListener('requireSync',listener);
