@@ -7,8 +7,7 @@ Plugin for using PixLive SDK in Ionic framework.
   
   `ionic add vidinoti/angular-pixlive`
 * Add the Cordova plugin for PixLive SDK to your Ionic project:
-  
-  `ionic plugin add cordova-plugin-pixlive --variable PIXLIVE_SDK_IOS_LOCATION=\"/home/PixLiveSDKiOS/VDARSDK.framework\" --variable PIXLIVE_SDK_ANDROID_LOCATION=\"/home/PixLiveSDKAndroid/vdarsdk-release.aar\"`
+  `ionic plugin add cordova-plugin-pixlive  --variable LICENSE_KEY=MyLicenseKey --variable PIXLIVE_SDK_IOS_LOCATION=\"/home/PixLiveSDKiOS/VDARSDK.framework\" --variable PIXLIVE_SDK_ANDROID_LOCATION=\"/home/PixLiveSDKAndroid/vdarsdk-release.aar\"`
   
   where the paths corresponds to the location for iOS and Android of the framework and AAR files.
 * Add JS Bundle file in you index.html: 
@@ -19,15 +18,16 @@ Plugin for using PixLive SDK in Ionic framework.
   ```js
 angular.module('myApp', ['ionic', 'myApp.controllers', 'myApp.services', 'pixlive'])
   ```
-* Add the PixLive SDK init call in your app.js, in the init part: 
+* Optionally set up push notification in your app.js, in the init part: 
 
   ```js
 if(window.cordova && window.cordova.plugins) {
   //Init PixLive SDK
-  cordova.plugins.PixLive.init(cordova.file.dataDirectory+'pixliveData','<My License ID>');
+  cordova.plugins.PixLive.setNotificationsSupport(true,'GoogleProjectID');
 }
   ```
   
+  where GoogleProjectID corresponds to the ID of the Google project you created in the Google Developer console.
 * Add an Augmented Reality view in one of your Ionic views. Note that content inserted within the view will be displayed on top of the AR camera view.
   
   ```html
@@ -70,6 +70,7 @@ The following directives can be used **as attribute** on any elements to get the
 * pxlCodeRecognize
 * pxlAnnotationsPresent
 * pxlAnnotationsHide
+* pxlSynchronizationRequired
 
 It can be used for example as follow in your HTML template:
 
