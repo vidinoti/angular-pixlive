@@ -407,7 +407,7 @@ pixliveModule
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
                         scope.$apply(function(self) {
-                            self[attrs.pxlAnnotationsPresent](event.code);
+                            self[attrs.pxlAnnotationsPresent]();
                         });
                     }
                     PxlEventService.addListener('presentAnnotations',listener);
@@ -424,7 +424,7 @@ pixliveModule
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
                         scope.$apply(function(self) {
-                            self[attrs.pxlAnnotationsHide](event.code);
+                            self[attrs.pxlAnnotationsHide]();
                         });
                     }
                     PxlEventService.addListener('hideAnnotations',listener);
@@ -441,7 +441,7 @@ pixliveModule
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
                         scope.$apply(function(self) {
-                            self[attrs.pxlSynchronizationRequired](event.code);
+                            self[attrs.pxlSynchronizationRequired](event.tags);
                         });
                     }
                     PxlEventService.addListener('requireSync',listener);
