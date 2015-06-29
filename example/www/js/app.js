@@ -22,7 +22,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     if(window.cordova && window.cordova.plugins) {
       //Set up notifications. Replave GoogleProjectID with your Google Developer console project ID.
-      cordova.plugins.PixLive.setNotification(true,'GoogleProjectID');
+      cordova.plugins.PixLive.setNotificationsSupport(true,'GoogleProjectID');
     }
   });
 })
