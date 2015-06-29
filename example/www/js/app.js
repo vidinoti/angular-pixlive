@@ -14,14 +14,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
+    
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
 
     if(window.cordova && window.cordova.plugins) {
-      //Init PixLive SDK
-      cordova.plugins.PixLive.init(cordova.file.dataDirectory+'pixliveData','<My License ID>');
+      //Set up notifications. Replave GoogleProjectID with your Google Developer console project ID.
+      cordova.plugins.PixLive.setNotification(true,'GoogleProjectID');
     }
   });
 })
