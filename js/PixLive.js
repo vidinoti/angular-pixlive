@@ -87,9 +87,23 @@ pixliveModule
                                                 $scope.arView.enableTouch();
                                             };
 
+                                            $scope.transferShown = function(){
+                                                ionic.trigger('transfer.shown', {
+                                                    target: window
+                                                });
+                                            };
+
+                                            $scope.transferHidden = function(){
+                                                ionic.trigger('transfer.hidden', {
+                                                    target: window
+                                                });
+                                            };
+
                                             ionic.on('resize', $scope.onResize, window);
                                             ionic.on('backdrop.shown', $scope.onModalShown, window);
                                             ionic.on('backdrop.hidden', $scope.onModalHidden, window);
+                                            $scope.$on('popover.shown', $scope.transferShown);
+                                            $scope.$on('popover.hidden', $scope.transferHidden);
 
                                         }, 300);
                                     }
@@ -130,10 +144,12 @@ pixliveModule
                             }
                             if ($scope.onModalShown) {
                                 ionic.off('backdrop.shown', $scope.onModalShown, window);
+                                $scope.$off('popover.shown', $scope.transferShown);
                                 $scope.onModalShown = null;
                             }
                             if ($scope.onModalHidden) {
                                 ionic.off('backdrop.hidden', $scope.onModalHidden, window);
+                                $scope.$off('popover.hidden', $scope.transferHidden);
                                 $scope.onModalHidden = null;
                             }
                         });
@@ -160,12 +176,7 @@ pixliveModule
 
                     $delegate.backdropHolds = 0;
 
-                    $delegate.retain = function() {
-                        var args = [].slice.call(arguments);
-
-                        // Call the original with the output prepended with formatted timestamp
-                        retainFn.apply(null, args)
-
+                    $delegate.addBackdropHolds =function(){
                         $delegate.backdropHolds++;
 
                         //Call the disable 
@@ -176,12 +187,7 @@ pixliveModule
                         }
                     };
 
-                    $delegate.release = function() {
-                        var args = [].slice.call(arguments);
-
-                        // Call the original with the output prepended with formatted timestamp
-                        releaseFn.apply(null, args)
-
+                    $delegate.removeBackdropHolds =function(){ 
                         $delegate.backdropHolds--;
 
                         //Call the disable 
@@ -192,9 +198,30 @@ pixliveModule
                         }
                     };
 
+                    ionic.on('transfer.shown', $delegate.addBackdropHolds, window);
+                    ionic.on('transfer.hidden', $delegate.removeBackdropHolds, window);
+
+                    $delegate.retain = function() {
+                        var args = [].slice.call(arguments);
+
+                        // Call the original with the output prepended with formatted timestamp
+                        retainFn.apply(null, args)
+
+                        $delegate.addBackdropHolds();
+                    };
+
+                    $delegate.release = function() {
+                        var args = [].slice.call(arguments);
+
+                        // Call the original with the output prepended with formatted timestamp
+                        releaseFn.apply(null, args)
+
+                        $delegate.removeBackdropHolds
+                    };
+
                     $delegate.isDisplayed = function() {
                         return $delegate.backdropHolds>0;
-                    }
+                    };
 
                     return $delegate;
                 }
