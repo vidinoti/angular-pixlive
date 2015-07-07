@@ -153,12 +153,10 @@ pixliveModule
                             }
                             if ($scope.onModalShown) {
                                 ionic.off('backdrop.shown', $scope.onModalShown, window);
-                                $scope.$off('popover.shown', $scope.transferShown);
                                 $scope.onModalShown = null;
                             }
                             if ($scope.onModalHidden) {
                                 ionic.off('backdrop.hidden', $scope.onModalHidden, window);
-                                $scope.$off('popover.hidden', $scope.transferHidden);
                                 $scope.onModalHidden = null;
                             }
                         });
