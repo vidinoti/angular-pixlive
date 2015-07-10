@@ -183,7 +183,7 @@ pixliveModule
 
                     $delegate.backdropHolds = 0;
 
-                    $delegate.addBackdropHolds =function(){
+                    $delegate.addBackdropHolds = function(){
                         $delegate.backdropHolds++;
 
                         //Call the disable 
@@ -194,7 +194,7 @@ pixliveModule
                         }
                     };
 
-                    $delegate.removeBackdropHolds =function(){ 
+                    $delegate.removeBackdropHolds = function(){ 
                         $delegate.backdropHolds--;
 
                         //Call the disable 
@@ -223,7 +223,7 @@ pixliveModule
                         // Call the original with the output prepended with formatted timestamp
                         releaseFn.apply(null, args)
 
-                        $delegate.removeBackdropHolds
+                        $delegate.removeBackdropHolds();
                     };
 
                     $delegate.isDisplayed = function() {
