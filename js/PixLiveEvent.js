@@ -62,7 +62,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlContextEnter](event.context);
                         });
-                    }
+                    };
                     PxlEventService.addListener('enterContext',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('enterContext',listener);
@@ -80,7 +80,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlContextExit](event.context);
                         });
-                    }
+                    };
                     PxlEventService.addListener('exitContext',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('exitContext',listener);
@@ -98,7 +98,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlCodeRecognize](event.code);
                         });
-                    }
+                    };
                     PxlEventService.addListener('codeRecognize',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('codeRecognize',listener);
@@ -115,7 +115,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlAnnotationsPresent]();
                         });
-                    }
+                    };
                     PxlEventService.addListener('presentAnnotations',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('presentAnnotations',listener);
@@ -132,7 +132,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlAnnotationsHide]();
                         });
-                    }
+                    };
                     PxlEventService.addListener('hideAnnotations',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('hideAnnotations',listener);
@@ -149,7 +149,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlSynchronizationRequired](event.tags);
                         });
-                    }
+                    };
                     PxlEventService.addListener('requireSync',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('requireSync',listener);

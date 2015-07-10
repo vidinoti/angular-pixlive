@@ -57,6 +57,8 @@ myApp.controller('PixLiveCtrl', function($scope, $ionicLoading, $compile, PxlRem
             title: 'PixLive Synchronization Error',
             template: reason
         });
+    }, function(progress) {
+        console.log('Synchronization progress: '+progress);
     });
 });
 ```

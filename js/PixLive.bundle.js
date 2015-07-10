@@ -250,7 +250,8 @@ pixliveModule
     .factory('PxlRemoteController', [
         '$ionicPlatform',
         '$q',
-        function PxlRemoteController($ionicPlatform, $q) {
+        'PxlEventService',
+        function PxlRemoteController($ionicPlatform, $q, PxlEventService) {
 
             /*private*/
 
@@ -258,17 +259,29 @@ pixliveModule
             return {
                 synchronize: function(tags) {
                     var deferred = $q.defer();
-                    
+
+                    var callbackListener = function(event) {
+                        deferred.notify(event.progress*100);
+                    };
+
+                    //Register progress listener
+                    PxlEventService.addListener('syncProgress',callbackListener);
+
                     $ionicPlatform.ready(function () {
+
                         if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
                             window.cordova.plugins.PixLive.synchronize(tags, function(contexts) {
+                                PxlEventService.removeListener('syncProgress',callbackListener);
                                 deferred.resolve(contexts);
                             }, function(reason) {
+                                PxlEventService.removeListener('syncProgress',callbackListener);
                                 deferred.reject(reason);
                             });
                         } else {
+                            PxlEventService.removeListener('syncProgress',callbackListener);
                             deferred.resolve([]);
                         }
+
                     });
 
                     return deferred.promise;
@@ -381,7 +394,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlContextEnter](event.context);
                         });
-                    }
+                    };
                     PxlEventService.addListener('enterContext',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('enterContext',listener);
@@ -399,7 +412,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlContextExit](event.context);
                         });
-                    }
+                    };
                     PxlEventService.addListener('exitContext',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('exitContext',listener);
@@ -417,7 +430,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlCodeRecognize](event.code);
                         });
-                    }
+                    };
                     PxlEventService.addListener('codeRecognize',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('codeRecognize',listener);
@@ -434,7 +447,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlAnnotationsPresent]();
                         });
-                    }
+                    };
                     PxlEventService.addListener('presentAnnotations',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('presentAnnotations',listener);
@@ -451,7 +464,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlAnnotationsHide]();
                         });
-                    }
+                    };
                     PxlEventService.addListener('hideAnnotations',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('hideAnnotations',listener);
@@ -468,7 +481,7 @@ pixliveModule
                         scope.$apply(function(self) {
                             self[attrs.pxlSynchronizationRequired](event.tags);
                         });
-                    }
+                    };
                     PxlEventService.addListener('requireSync',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('requireSync',listener);
