@@ -43,4 +43,10 @@ module.exports = function(grunt) {
       var dgeni = new Dgeni([require('./docs/dgeni-conf')]);
       dgeni.generate().then(done);
     });
+
+    grunt.registerTask('test', [
+        'default'
+    ], function() {
+        // Todo
+    });
 };
