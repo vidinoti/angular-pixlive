@@ -1,4 +1,6 @@
 # angular-pixlive
+[![Build Status](https://travis-ci.org/vidinoti/angular-pixlive.svg?branch=master)](https://travis-ci.org/vidinoti/angular-pixlive)
+
 Plugin for using PixLive SDK in Ionic framework.
 
 ## Using the AR View
