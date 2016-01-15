@@ -1,6 +1,6 @@
 /*
- * angular-pixlive v0.0.1
- * (c) 2015 Vidinoti http://vidinoti.com
+ * angular-pixlive v1
+ * (c) 2015-2016 Vidinoti https://vidinoti.com
  * License: MIT
  * 
  * Remote Controller

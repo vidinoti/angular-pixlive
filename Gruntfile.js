@@ -1,9 +1,11 @@
+var Dgeni = require('dgeni');
+
 module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        clean: ["js/PixLive.bundle.js", "js/PixLive.bundle.min.js"],
+        clean: ["js/PixLive.bundle.js", "js/PixLive.bundle.min.js", "build"],
 
         concat: {
             options: {
@@ -21,7 +23,9 @@ module.exports = function(grunt) {
                     'js/PixLive.bundle.min.js': ['js/PixLive.bundle.js']
                 }
             }
-        }
+        },
+
+        
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -31,6 +35,12 @@ module.exports = function(grunt) {
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
     grunt.registerTask('default', [
-        'clean', 'concat', 'uglify'
+        'clean', 'doc', 'concat', 'uglify'
     ]);
+
+    grunt.registerTask('doc', 'Generate docs via dgeni.', function() {
+      var done = this.async();
+      var dgeni = new Dgeni([require('./docs/dgeni-conf')]);
+      dgeni.generate().then(done);
+    });
 };
