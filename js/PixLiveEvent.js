@@ -1,6 +1,6 @@
 /*
- * angular-pixlive v0.0.1
- * (c) 2015 Vidinoti http://vidinoti.com
+ * angular-pixlive v1
+ * (c) 2015-2016 Vidinoti https://vidinoti.com
  * License: MIT
  *
  * Event directives
@@ -53,10 +53,30 @@ pixliveModule
             }
         });
     }])
+
+    /**
+     * @ngdoc directive
+     * @name pxlContextEnter
+     * @element Attribute
+     * @restrict 'A'
+     *
+     * @description
+     * Expression that is evaluated when a context is entered. Such an event 
+     * happens when you are getting close to a beacon registered with the PixLive SDK 
+     * or when an image has been recognized.
+     *
+     * The unique ID of the context is passed as parameter
+     *
+     * @example
+       <div pxl-context-enter="myScopeFunction">
+        ...
+       </div>
+     */
     .directive('pxlContextEnter', [
         'PxlEventService',
         function(PxlEventService) {
             return {
+                restrict: 'A',
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
                         scope.$apply(function(self) {
@@ -71,10 +91,30 @@ pixliveModule
             };
         }
     ])
+
+    /**
+     * @ngdoc directive
+     * @name pxlContextExit
+     * @element Attribute
+     * @restrict 'A'
+     *
+     * @description
+     * Expression that is evaluated when a context is exited. Such an event 
+     * happens when you are getting away from a beacon registered with the PixLive SDK 
+     * or when an image that has been previously recognized is now out of sight from the camera.
+     *
+     * The unique ID of the context is passed as parameter
+     *
+     * @example
+       <div pxl-context-enter="myScopeFunction">
+        ...
+       </div>
+     */
     .directive('pxlContextExit', [
         'PxlEventService',
         function(PxlEventService) {
             return {
+                restrict: 'A',
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
                         scope.$apply(function(self) {
@@ -89,10 +129,68 @@ pixliveModule
             };
         }
     ])
+    .directive('pxlSensorTriggered', [
+        'PxlEventService',
+        function(PxlEventService) {
+            return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    var listener = function(event) {
+                        scope.$apply(function(self) {
+                            self[attrs.pxlSensorTriggered](event.sensorId,event.sensorType);
+                        });
+                    };
+                    PxlEventService.addListener('sensorTriggered',listener);
+                    element.bind('$destroy', function() {
+                        PxlEventService.removeListener('sensorTriggered',listener);
+                    });
+                }
+            };
+        }
+    ])
+    .directive('pxlSensorUpdate', [
+        'PxlEventService',
+        function(PxlEventService) {
+            return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    var listener = function(event) {
+                        scope.$apply(function(self) {
+                            self[attrs.pxlSensorUpdate](event.sensorId,event.sensorType, event);
+                        });
+                    };
+                    PxlEventService.addListener('sensorUpdate',listener);
+                    element.bind('$destroy', function() {
+                        PxlEventService.removeListener('sensorUpdate',listener);
+                    });
+                }
+            };
+        }
+    ])
+    .directive('pxlSensorUntriggered', [
+        'PxlEventService',
+        function(PxlEventService) {
+            return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    var listener = function(event) {
+                        scope.$apply(function(self) {
+                            self[attrs.pxlSensorUntriggered](event.sensorId,event.sensorType);
+                        });
+                    };
+                    PxlEventService.addListener('sensorUntriggered',listener);
+                    element.bind('$destroy', function() {
+                        PxlEventService.removeListener('sensorUntriggered',listener);
+                    });
+                }
+            };
+        }
+    ])
     .directive('pxlCodeRecognize', [
         'PxlEventService',
         function(PxlEventService) {
             return {
+                restrict: 'A',
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
                         scope.$apply(function(self) {
@@ -110,6 +208,7 @@ pixliveModule
         'PxlEventService',
         function(PxlEventService) {
             return {
+                restrict: 'A',
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
                         scope.$apply(function(self) {
@@ -127,6 +226,7 @@ pixliveModule
         'PxlEventService',
         function(PxlEventService) {
             return {
+                restrict: 'A',
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
                         scope.$apply(function(self) {
@@ -144,6 +244,7 @@ pixliveModule
         'PxlEventService',
         function(PxlEventService) {
             return {
+                restrict: 'A',
                 link: function(scope, element, attrs) {
                     var listener = function(event) {
                         scope.$apply(function(self) {
