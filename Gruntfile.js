@@ -1,5 +1,3 @@
-var Dgeni = require('dgeni');
-
 module.exports = function(grunt) {
 
     grunt.initConfig({
