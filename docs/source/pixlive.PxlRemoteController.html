@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+  <head>
+    <base href="../">
+    <title>JSDoc: source : RemoteController.js</title>
+    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css">
+    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" rel="stylesheet" type="text/css">
+    <link href="css/custom.css" type="text/css" rel="stylesheet">
+    <script src="js/prettify.js"></script>
+    <script src="js/angular.min.js"></script>
+  </head>
+  <body ng-app="">
+    <nav>
+      <h2><a href="index.html">Index</a></h2>
+      <ul class="module">
+        <!-- pixlive -->
+        <h3>
+          <a href="" ng-click="modulepixlive = !modulepixlive">
+            module: pixlive
+          </a>
+          <i ng-cloak="" ng-show="modulepixlive">+</i>
+        </h3>
+        <li id="pixlive" ng-hide="modulepixlive">
+          <ul class="group">
+            <h3>
+              <a href="" ng-click="pixliveundefined = !pixliveundefined">
+                undefined
+              </a>
+              <i ng-cloak="" ng-show="pixliveundefined">+</i>
+            </h3>
+            <ul ng-hide="pixliveundefined">
+              <li>
+                <a href="pixlive.Context.html">Context</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h3>
+              <a href="" ng-click="pixlivedirective = !pixlivedirective">
+                directive
+              </a>
+              <i ng-cloak="" ng-show="pixlivedirective">+</i>
+            </h3>
+            <ul ng-hide="pixlivedirective">
+              <li>
+                <a href="pixlive.pxlAnnotationsHide.html">pxlAnnotationsHide</a>
+              </li><li>
+                <a href="pixlive.pxlAnnotationsPresent.html">pxlAnnotationsPresent</a>
+              </li><li>
+                <a href="pixlive.pxlCodeRecognize.html">pxlCodeRecognize</a>
+              </li><li>
+                <a href="pixlive.pxlContextEnter.html">pxlContextEnter</a>
+              </li><li>
+                <a href="pixlive.pxlContextExit.html">pxlContextExit</a>
+              </li><li>
+                <a href="pixlive.pxlSensorTriggered.html">pxlSensorTriggered</a>
+              </li><li>
+                <a href="pixlive.pxlSensorUntriggered.html">pxlSensorUntriggered</a>
+              </li><li>
+                <a href="pixlive.pxlSensorUpdate.html">pxlSensorUpdate</a>
+              </li><li>
+                <a href="pixlive.pxlSynchronizationRequired.html">pxlSynchronizationRequired</a>
+              </li><li>
+                <a href="pixlive.pxlView.html">pxlView</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h3>
+              <a href="" ng-click="pixliveservice = !pixliveservice">
+                service
+              </a>
+              <i ng-cloak="" ng-show="pixliveservice">+</i>
+            </h3>
+            <ul ng-hide="pixliveservice">
+              <li>
+                <a href="pixlive.PxlController.html">PxlController</a>
+              </li><li>
+                <a href="pixlive.PxlEventService.html">PxlEventService</a>
+              </li><li>
+                <a href="pixlive.PxlRemoteController.html">PxlRemoteController</a>
+              </li>
+            </ul>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div id="content" class="page-wrap">
+      <h1 class="title">
+        source : RemoteController.js
+      </h1>
+      <div id="main" class="big-container">
+        <!-- source code html -->
+        <article>
+          <pre class="prettyprint source linenums"><code>/*
+ * angular-pixlive v1
+ * (c) 2015-2016 Vidinoti https://vidinoti.com
+ * License: MIT
+ * 
+ * Remote Controller
+ *
+ */
+'use strict';
+pixliveModule
+    /**
+     * @memberof pixlive
+     * @ngdoc service
+     * @name PxlRemoteController
+     * @param {service} $ionicPlatform The Ionic Platform helper
+     * @param {service} $q Angular promise service
+     * @param {service} PxlEventService PixLive SDK Event service
+     * @description 
+     *   Manage and trigger PixLive Maker content synchronization with the app.
+     */
+    .factory('PxlRemoteController', [
+        '$ionicPlatform',
+        '$q',
+        'PxlEventService',
+        function PxlRemoteController($ionicPlatform, $q, PxlEventService) {
+            /*private*/
+            /*public*/
+            return {
+                /**
+                 * Start an asynchronous content synchronization with PixLive Maker backend
+                 *
+                 * **Warning**: Only one synchronization can be started at a time.
+                 * 
+                 * @memberof PxlRemoteController
+                 * @param {string[]} tags The array of tags to start the synchronization with. Pass an empty array for synchronizing your app with all the available content.
+                 * @returns {Promise} The Angular promise that can be used for checking asynchronously the result of the call.
+                 */
+                synchronize: function(tags) {
+                    var deferred = $q.defer();
+                    var callbackListener = function(event) {
+                        deferred.notify(event.progress*100);
+                    };
+                    //Register progress listener
+                    PxlEventService.addListener('syncProgress',callbackListener);
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.synchronize(tags, function(contexts) {
+                                PxlEventService.removeListener('syncProgress',callbackListener);
+                                deferred.resolve(contexts);
+                            }, function(reason) {
+                                PxlEventService.removeListener('syncProgress',callbackListener);
+                                deferred.reject(reason);
+                            });
+                        } else {
+                            PxlEventService.removeListener('syncProgress',callbackListener);
+                            deferred.resolve([]);
+                        }
+                    });
+                    return deferred.promise;
+                }
+            };
+        }
+    ]);</code></pre>
+        </article>
+        <!-- index.html -->
+        <!-- class files -->
+      </div>
+      <footer style="clear:both">
+        Documentation generated by
+        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
+        using
+        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>
+      </footer>
+    </div>
+    <!--%= prettyJson %-->
+    <script>
+      prettyPrint();
+      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
+      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
+    </script>
+  </body>
+</html>

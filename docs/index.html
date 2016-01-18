@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+  <head>
+    <title>JSDoc: Index</title>
+    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css">
+    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" rel="stylesheet" type="text/css">
+    <link href="css/custom.css" type="text/css" rel="stylesheet">
+    <script src="js/prettify.js"></script>
+    <script src="js/angular.min.js"></script>
+  </head>
+  <body ng-app="">
+    <nav>
+      <h2><a href="index.html">Index</a></h2>
+      <ul class="module">
+        <!-- pixlive -->
+        <h3>
+          <a href="" ng-click="modulepixlive = !modulepixlive">
+            module: pixlive
+          </a>
+          <i ng-cloak="" ng-show="modulepixlive">+</i>
+        </h3>
+        <li id="pixlive" ng-hide="modulepixlive">
+          <ul class="group">
+            <h3>
+              <a href="" ng-click="pixliveundefined = !pixliveundefined">
+                undefined
+              </a>
+              <i ng-cloak="" ng-show="pixliveundefined">+</i>
+            </h3>
+            <ul ng-hide="pixliveundefined">
+              <li>
+                <a href="pixlive.Context.html">Context</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h3>
+              <a href="" ng-click="pixlivedirective = !pixlivedirective">
+                directive
+              </a>
+              <i ng-cloak="" ng-show="pixlivedirective">+</i>
+            </h3>
+            <ul ng-hide="pixlivedirective">
+              <li>
+                <a href="pixlive.pxlAnnotationsHide.html">pxlAnnotationsHide</a>
+              </li><li>
+                <a href="pixlive.pxlAnnotationsPresent.html">pxlAnnotationsPresent</a>
+              </li><li>
+                <a href="pixlive.pxlCodeRecognize.html">pxlCodeRecognize</a>
+              </li><li>
+                <a href="pixlive.pxlContextEnter.html">pxlContextEnter</a>
+              </li><li>
+                <a href="pixlive.pxlContextExit.html">pxlContextExit</a>
+              </li><li>
+                <a href="pixlive.pxlSensorTriggered.html">pxlSensorTriggered</a>
+              </li><li>
+                <a href="pixlive.pxlSensorUntriggered.html">pxlSensorUntriggered</a>
+              </li><li>
+                <a href="pixlive.pxlSensorUpdate.html">pxlSensorUpdate</a>
+              </li><li>
+                <a href="pixlive.pxlSynchronizationRequired.html">pxlSynchronizationRequired</a>
+              </li><li>
+                <a href="pixlive.pxlView.html">pxlView</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h3>
+              <a href="" ng-click="pixliveservice = !pixliveservice">
+                service
+              </a>
+              <i ng-cloak="" ng-show="pixliveservice">+</i>
+            </h3>
+            <ul ng-hide="pixliveservice">
+              <li>
+                <a href="pixlive.PxlController.html">PxlController</a>
+              </li><li>
+                <a href="pixlive.PxlEventService.html">PxlEventService</a>
+              </li><li>
+                <a href="pixlive.PxlRemoteController.html">PxlRemoteController</a>
+              </li>
+            </ul>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div id="content" class="page-wrap">
+      <h1 class="title">
+        Index
+      </h1>
+      <div id="main" class="big-container">
+        <!-- source code html -->
+        <!-- index.html -->
+        <section class="section-readme">
+          <article>
+            <h1>angular-pixlive</h1><p><a href="https://travis-ci.org/vidinoti/angular-pixlive"><img src="https://travis-ci.org/vidinoti/angular-pixlive.svg?branch=master" alt="Build Status"></a></p>
+<p>Plugin for using PixLive SDK in Ionic framework.</p>
+<h2>Documentation</h2><p>The documentation is available at <a href="http://vidinoti.github.io/angular-pixlive/docs">http://vidinoti.github.io/angular-pixlive/docs</a>.</p>
+<h2>Using the Augmented Reality View</h2><p>Follow the following steps do add an augmented reality view in your Ionic project:</p>
+<ul>
+<li><p>Add the plugin to your Ionic project: </p>
+<p><code>ionic add vidinoti/angular-pixlive</code></p>
+</li>
+<li><p>Add the Cordova plugin for PixLive SDK to your Ionic project:</p>
+<pre class="prettyprint source lang-bash"><code>ionic plugin add cordova-plugin-pixlive  --variable LICENSE_KEY=MyLicenseKey \
+    --variable PIXLIVE_SDK_IOS_LOCATION=\&quot;/home/PixLiveSDKiOS/VDARSDK.framework\&quot;
+    --variable PIXLIVE_SDK_ANDROID_LOCATION=\&quot;/home/PixLiveSDKAndroid/vdarsdk-release.aar\&quot;</code></pre><p>where the paths corresponds to the location for iOS and Android of the framework and AAR files. <strong>Do not remove the backslashes before and after the quotes (i.e. \&quot;) or the command will fail.</strong></p>
+</li>
+<li><p>Add JS Bundle file in you index.html: </p>
+<p><code>&lt;script src=&quot;lib/angular-pixlive/js/PixLive.bundle.js&quot;&gt;&lt;/script&gt;</code> </p>
+</li>
+<li><p>Add the <code>pixlive</code> angular module to be loaded with your app. It should like similar to:</p>
+<pre class="prettyprint source lang-js"><code>angular.module('myApp', ['ionic', 'myApp.controllers', 'myApp.services', 'pixlive'])</code></pre></li>
+<li><p>Optionally set up push notification in your app.js, in the init part: </p>
+<pre class="prettyprint source lang-js"><code>if(window.cordova && window.cordova.plugins) {
+//Init PixLive SDK
+cordova.plugins.PixLive.setNotificationsSupport(true,'GoogleProjectID');
+}</code></pre><p>where <code>GoogleProjectID</code> corresponds to the ID of the Google project you created in the Google Developer console.</p>
+</li>
+<li><p>Add an Augmented Reality view in one of your Ionic views. Note that content inserted within the view will be displayed on top of the AR camera view.</p>
+<pre class="prettyprint source lang-html"><code>&lt;ion-view view-title=&quot;PixLive&quot; style=&quot;background-color: transparent !important;&quot;>
+&lt;pxl-view>
+  &lt;!-- You can insert other elements here to create overlays -->
+&lt;/pxl-view>
+&lt;/ion-view></code></pre><p><strong>Warning</strong>: The camera view is inserted <strong>below</strong> your Ionic app. Therefore you need to make sure to have your view transparent where the camera should appear. As above, set the CSS property <code>background-color</code> to <code>transparent</code> on your ion-view as well as on your ion-tabs, if any.</p>
+</li>
+</ul>
+<h2>Synchronizing content from PixLive Maker</h2><p>PixLive Maker is a platform that allows anyone to create content for your app embeding PixLive SDK.</p>
+<p>Your app needs to be synchronized with PixLive Maker so that the content can be used within the app.</p>
+<p>To do so, the plugin exposes a <code>PxlRemoteController</code> service allowing you to request synchronizations of the contexts / AR content. This can be done anywhere in your controllers or at app launch time. The plugin make sure that everything is ready before issuing the call so it's safe to use it anywhere.</p>
+<p>Example of usage within a controller constructor:</p>
+<pre class="prettyprint source lang-js"><code>myApp.controller('PixLiveCtrl', function($scope, $ionicLoading, $compile, PxlRemoteController, $ionicPopup) {
+    // Trigger a synchronization with the tag *test*
+    // You can pass an empty array to synchronize with all the contexts.
+    PxlRemoteController.synchronize(['test']).then(function(contexts) {
+        console.log('Syncronization OK: ');
+        console.log(contexts);
+    }, function(reason) {
+        $ionicPopup.alert({
+            title: 'PixLive Synchronization Error',
+            template: reason
+        });
+    }, function(progress) {
+        console.log('Synchronization progress: '+progress);
+    });
+});</code></pre><h2>Directives for events</h2><p>The following directives can be used <strong>as attribute</strong> on any elements to get the associated events from the PixLive SDK:</p>
+<ul>
+<li>pxlContextEnter</li>
+<li>pxlContextExit</li>
+<li>pxlCodeRecognize</li>
+<li>pxlAnnotationsPresent</li>
+<li>pxlAnnotationsHide</li>
+<li>pxlSynchronizationRequired</li>
+<li>pxlSensorTriggered</li>
+<li>pxlSensorUpdate</li>
+<li>pxlSensorUntriggered</li>
+</ul>
+<p>It can be used for example as follow in your HTML template:</p>
+<pre class="prettyprint source"><code>&lt;ion-view view-title=&quot;AR&quot; style=&quot;background-color: transparent !important;&quot;>
+  &lt;pxl-view pxl-context-enter=&quot;contextEnter&quot;>
+  &lt;/pxl-view>
+&lt;/ion-view></code></pre><p>This will call the <code>contextEnter</code> on the controller linked with the view when an image or a iBeacon is detected. The context ID is passed as a parameter to the contextEnter method.</p>
+<p>See the directives' doc for more information.</p>
+          </article>
+        </section>
+        <!-- class files -->
+      </div>
+      <footer style="clear:both">
+        Documentation generated by
+        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
+        using
+        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>
+      </footer>
+    </div>
+    <!--%= prettyJson %-->
+    <script>
+      prettyPrint();
+      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
+      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
+    </script>
+  </body>
+</html>
