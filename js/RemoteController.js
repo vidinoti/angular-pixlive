@@ -10,6 +10,17 @@
 'use strict';
 
 pixliveModule
+
+    /**
+     * @memberof pixlive
+     * @ngdoc service
+     * @name PxlRemoteController
+     * @param {service} $ionicPlatform The Ionic Platform helper
+     * @param {service} $q Angular promise service
+     * @param {service} PxlEventService PixLive SDK Event service
+     * @description 
+     *   Manage and trigger PixLive Maker content synchronization with the app.
+     */
     .factory('PxlRemoteController', [
         '$ionicPlatform',
         '$q',
@@ -20,6 +31,16 @@ pixliveModule
 
             /*public*/
             return {
+
+                /**
+                 * Start an asynchronous content synchronization with PixLive Maker backend
+                 *
+                 * **Warning**: Only one synchronization can be started at a time.
+                 * 
+                 * @memberof PxlRemoteController
+                 * @param {string[]} tags The array of tags to start the synchronization with. Pass an empty array for synchronizing your app with all the available content.
+                 * @returns {Promise} The Angular promise that can be used for checking asynchronously the result of the call.
+                 */
                 synchronize: function(tags) {
                     var deferred = $q.defer();
 

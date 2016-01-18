@@ -7,6 +7,32 @@
 'use strict';
 
 pixliveModule
+
+    /**
+     * @ngdoc directive
+     * @name pxlView
+     * @memberof pixlive
+     * @param {service} $timeout Angular $timeout service
+     * @param {service} $ionicPosition Ionic $ionicPosition service
+     * @param {service} $ionicPlatform Ionic $ionicPlatform service
+     * @param {service} $ionicBackdrop Ionic $ionicBackdrop service
+     * @restrict E
+     *
+     * @description
+     * Add an augmented reality view to your Ionic app.
+     *
+     * **Notice**: You should minimize the number of AR view included into your app to the minimum as this is CPU resource intensive. 
+     * You should also avoid having two AR views visible at the same time as this will create unexpected behaviors.
+     * 
+     * **Warning**: This view has to be inside an `ion-view` element whose background has been set to transparent. Failing to do so will make the AR view invisible.
+     * 
+     * @example
+     * <ion-view view-title="AR" style="background-color: transparent !important;">
+     *  <pxl-view>
+     *    <!-- Any overlay you want -->
+     *  </pxl-view>
+     * </ion-view>
+     */
     .directive('pxlView', [
         '$timeout',
         '$ionicPosition',

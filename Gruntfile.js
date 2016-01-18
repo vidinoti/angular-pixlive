@@ -25,6 +25,19 @@ module.exports = function(grunt) {
             }
         },
 
+        jsdoc: {
+            dist: {
+              src: ['js'],
+              options: {
+                destination: 'build/docs',
+                configure: 'node_modules/angular-jsdoc/common/conf.json',
+                template: 'node_modules/angular-jsdoc/angular-template',
+                tutorial: 'tutorials',
+                readme: './README.md'
+              }
+            }
+        }
+
         
     });
 
@@ -32,17 +45,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
     grunt.registerTask('default', [
-        'clean', 'doc', 'concat', 'uglify'
+        'clean', 'jsdoc', 'concat', 'uglify'
     ]);
 
-    grunt.registerTask('doc', 'Generate docs via dgeni.', function() {
-      var done = this.async();
-      var dgeni = new Dgeni([require('./docs/dgeni-conf')]);
-      dgeni.generate().then(done);
-    });
 
     grunt.registerTask('test', [
         'default'
