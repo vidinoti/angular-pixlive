@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="angular-pixlive : Plugin for using PixLive in hybrid Ionic app">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>angular-pixlive</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/vidinoti/angular-pixlive">View on GitHub</a>
+
+          <h1 id="project_title">angular-pixlive</h1>
+          <h2 id="project_tagline">Plugin for using PixLive in hybrid Ionic app</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/vidinoti/angular-pixlive/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/vidinoti/angular-pixlive/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="angular-pixlive" class="anchor" href="#angular-pixlive" aria-hidden="true"><span class="octicon octicon-link"></span></a>angular-pixlive</h1>
+
+<p><a href="https://travis-ci.org/vidinoti/angular-pixlive"><img src="https://travis-ci.org/vidinoti/angular-pixlive.svg?branch=master" alt="Build Status"></a></p>
+
+<p>Plugin for using PixLive SDK in Ionic framework.</p>
+
+<h2>
+<a id="using-the-ar-view" class="anchor" href="#using-the-ar-view" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the AR View</h2>
+
+<ul>
+<li>
+<p>Add the plugin to your Ionic project: </p>
+
+<p><code>ionic add vidinoti/angular-pixlive</code></p>
+</li>
+<li>
+<p>Add the Cordova plugin for PixLive SDK to your Ionic project:
+<code>ionic plugin add cordova-plugin-pixlive  --variable LICENSE_KEY=MyLicenseKey --variable PIXLIVE_SDK_IOS_LOCATION=\"/home/PixLiveSDKiOS/VDARSDK.framework\" --variable PIXLIVE_SDK_ANDROID_LOCATION=\"/home/PixLiveSDKAndroid/vdarsdk-release.aar\"</code></p>
+
+<p>where the paths corresponds to the location for iOS and Android of the framework and AAR files.</p>
+</li>
+<li>
+<p>Add JS Bundle file in you index.html: </p>
+
+<p><code>&lt;script src="lib/angular-pixlive/js/PixLive.bundle.js"&gt;&lt;/script&gt;</code> </p>
+</li>
+<li>
+<p>Add the <code>pixlive</code> angular module to be loaded with your app. It should like similar to:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">angular</span>.<span class="pl-en">module</span>(<span class="pl-s"><span class="pl-pds">'</span>myApp<span class="pl-pds">'</span></span>, [<span class="pl-s"><span class="pl-pds">'</span>ionic<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>myApp.controllers<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>myApp.services<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>pixlive<span class="pl-pds">'</span></span>])</pre></div>
+</li>
+<li>
+<p>Optionally set up push notification in your app.js, in the init part: </p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">if</span>(<span class="pl-smi">window</span>.<span class="pl-smi">cordova</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-smi">window</span>.<span class="pl-smi">cordova</span>.<span class="pl-c1">plugins</span>) {
+<span class="pl-c">//Init PixLive SDK</span>
+<span class="pl-smi">cordova</span>.<span class="pl-c1">plugins</span>.<span class="pl-smi">PixLive</span>.<span class="pl-en">setNotificationsSupport</span>(<span class="pl-c1">true</span>,<span class="pl-s"><span class="pl-pds">'</span>GoogleProjectID<span class="pl-pds">'</span></span>);
+}</pre></div>
+
+<p>where GoogleProjectID corresponds to the ID of the Google project you created in the Google Developer console.</p>
+</li>
+<li>
+<p>Add an Augmented Reality view in one of your Ionic views. Note that content inserted within the view will be displayed on top of the AR camera view.</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">ion</span><span class="pl-e">-view</span> <span class="pl-e">view-title</span>=<span class="pl-s"><span class="pl-pds">"</span>PixLive<span class="pl-pds">"</span></span> <span class="pl-e">style</span>=<span class="pl-s"><span class="pl-pds">"</span>background-color: transparent !important;<span class="pl-pds">"</span></span>&gt;
+&lt;<span class="pl-ent">pxl</span><span class="pl-e">-view</span>&gt;
+
+&lt;/<span class="pl-ent">pxl</span><span class="pl-e">-view</span>&gt;
+&lt;/<span class="pl-ent">ion</span><span class="pl-e">-view</span>&gt;</pre></div>
+</li>
+</ul>
+
+<p><strong>Warning</strong>: The camera view is inserted <strong>below</strong> your app. Therefore you need to make to have your view transparent where the camera should appear. As above, put the background color to transparent on your ion-view as well as on your ion-tabs, if any.</p>
+
+<h2>
+<a id="ar-model--context-synchronization" class="anchor" href="#ar-model--context-synchronization" aria-hidden="true"><span class="octicon octicon-link"></span></a>AR Model / Context Synchronization</h2>
+
+<p>The plugin exposes a <code>PxlRemoteController</code> service allowing you to request synchronizations of the contexts / AR Models. This can be done anywhere in your controllers or at app launch time. The plugin make sure that everything is ready before issuing the call so it's safe to use it anywhere.</p>
+
+<p>Example of usage:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">myApp</span>.<span class="pl-en">controller</span>(<span class="pl-s"><span class="pl-pds">'</span>PixLiveCtrl<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">$scope</span>, <span class="pl-smi">$ionicLoading</span>, <span class="pl-smi">$compile</span>, <span class="pl-smi">PxlRemoteController</span>, <span class="pl-smi">$ionicPopup</span>) {
+    <span class="pl-c">// Trigger a synchronization with the tag test, pass an empty array to synchronize with all the contexts.</span>
+    <span class="pl-smi">PxlRemoteController</span>.<span class="pl-en">synchronize</span>([<span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>]).<span class="pl-en">then</span>(<span class="pl-k">function</span>(<span class="pl-smi">contexts</span>) {
+        <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>Syncronization OK: <span class="pl-pds">'</span></span>);
+        <span class="pl-en">console</span>.<span class="pl-c1">log</span>(contexts);
+    }, <span class="pl-k">function</span>(<span class="pl-smi">reason</span>) {
+        <span class="pl-smi">$ionicPopup</span>.<span class="pl-c1">alert</span>({
+            title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>PixLive Synchronization Error<span class="pl-pds">'</span></span>,
+            template<span class="pl-k">:</span> reason
+        });
+    }, <span class="pl-k">function</span>(<span class="pl-smi">progress</span>) {
+        <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>Synchronization progress: <span class="pl-pds">'</span></span><span class="pl-k">+</span>progress);
+    });
+});</pre></div>
+
+<h2>
+<a id="events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events</h2>
+
+<p>The following directives can be used <strong>as attribute</strong> on any elements to get the associated events from the PixLive SD:</p>
+
+<ul>
+<li>pxlContextEnter</li>
+<li>pxlContextExit</li>
+<li>pxlCodeRecognize</li>
+<li>pxlAnnotationsPresent</li>
+<li>pxlAnnotationsHide</li>
+<li>pxlSynchronizationRequired</li>
+</ul>
+
+<p>It can be used for example as follow in your HTML template:</p>
+
+<pre><code>&lt;ion-view view-title="AR"  style="background-color: transparent !important;"&gt;
+  &lt;pxl-view pxl-context-enter="contextEnter"&gt;
+
+  &lt;/pxl-view&gt;
+&lt;/ion-view&gt;
+</code></pre>
+
+<p>This will call the <code>contextEnter</code> on the controller linked with the view when an image or a iBeacon is detected.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">angular-pixlive maintained by <a href="https://github.com/vidinoti">vidinoti</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
