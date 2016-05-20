@@ -109,3 +109,11 @@ It can be used for example as follow in your HTML template:
 This will call the `contextEnter` on the controller linked with the view when an image or a iBeacon is detected. The context ID is passed as a parameter to the contextEnter method.
 
 See the directives' doc for more information.
+
+## How to build
+
+```
+npm install -g grunt-cli
+npm install
+grunt
+```

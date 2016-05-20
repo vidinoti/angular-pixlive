@@ -103,7 +103,66 @@ pixliveModule
                     });
 
                     return deferred.promise;
+                },
+
+                /**
+                 * Asynchronously return the list of contexts that have been bookmarked.
+                 * 
+                 * See {@link Context} for the description of the Context class.
+                 * 
+                 * @memberof PxlController
+                 *
+                 * @returns {Promise} An Angular Promise where the success 
+                 *      method will be called with an `Array<Context>` 
+                 *      argument corresponding to the context/content that have been bookmarked. 
+                 */
+                getBookmarks: function() {
+                    var deferred = $q.defer();
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.getBookmarks(function(list) {
+                                deferred.resolve(list);
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
+                    return deferred.promise;
+                },
+
+                /**
+                 * Add a new bookmark for a given context. The context corresponding to the contextId
+                 * will be added to the bookmark list.
+                 * 
+                 * @param {string} the ID of the context to add to the bookmark list
+                 * 
+                 * @memberof PxlController
+                 */
+                addBookmark: function(contextId) {
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.addBookmark(contextId);
+                        }
+                    });
+                },
+
+                /**
+                 * Remove a context from the bookmark list.
+                 * 
+                 * @param {string} the ID of the context to remove from the bookmark list
+                 * 
+                 * @memberof PxlController
+                 */
+                removeBookmark: function(contextId) {
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.removeBookmark(contextId);
+                        }
+                    });
                 }
+
             };
         }
     ]);
