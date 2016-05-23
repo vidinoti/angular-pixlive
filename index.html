@@ -22,25 +22,25 @@
         <p class="view"><a href="https://github.com/vidinoti/angular-pixlive">View the Project on GitHub <small>vidinoti/angular-pixlive</small></a></p>
         <ul>
           <li><a href="https://github.com/vidinoti/angular-pixlive/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/vidinoti/angular-pixlive/tarball/master">Download <strong>TAR Ball</strong></a></li>
           <li><a href="https://github.com/vidinoti/angular-pixlive">View On <strong>GitHub</strong></a></li>
-          <li><a href="docs/">View <strong>Doc</strong></a></li>
         </ul>
       </header>
       <section>
         <h1>
-<a id="angular-pixlive" class="anchor" href="#angular-pixlive" aria-hidden="true"><span class="octicon octicon-link"></span></a>angular-pixlive</h1>
+<a id="angular-pixlive" class="anchor" href="#angular-pixlive" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>angular-pixlive</h1>
 
 <p><a href="https://travis-ci.org/vidinoti/angular-pixlive"><img src="https://travis-ci.org/vidinoti/angular-pixlive.svg?branch=master" alt="Build Status"></a></p>
 
 <p>Plugin for using PixLive SDK in Ionic framework.</p>
 
 <h2>
-<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h2>
 
 <p>The documentation is available at <a href="http://vidinoti.github.io/angular-pixlive/docs">http://vidinoti.github.io/angular-pixlive/docs</a>.</p>
 
 <h2>
-<a id="using-the-augmented-reality-view" class="anchor" href="#using-the-augmented-reality-view" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the Augmented Reality View</h2>
+<a id="using-the-augmented-reality-view" class="anchor" href="#using-the-augmented-reality-view" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using the Augmented Reality View</h2>
 
 <p>Follow the following steps do add an augmented reality view in your Ionic project:</p>
 
@@ -72,12 +72,20 @@
 <li>
 <p>Optionally set up push notification in your app.js, in the init part: </p>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-k">if</span>(<span class="pl-smi">window</span>.<span class="pl-smi">cordova</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-smi">window</span>.<span class="pl-smi">cordova</span>.<span class="pl-c1">plugins</span>) {
-<span class="pl-c">//Init PixLive SDK</span>
+<div class="highlight highlight-source-js"><pre><span class="pl-k">if</span>(<span class="pl-c1">window</span>.<span class="pl-smi">cordova</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-c1">window</span>.<span class="pl-smi">cordova</span>.<span class="pl-c1">plugins</span>) {
+<span class="pl-c">//Enable notifications</span>
 <span class="pl-smi">cordova</span>.<span class="pl-c1">plugins</span>.<span class="pl-smi">PixLive</span>.<span class="pl-en">setNotificationsSupport</span>(<span class="pl-c1">true</span>,<span class="pl-s"><span class="pl-pds">'</span>GoogleProjectID<span class="pl-pds">'</span></span>);
 }</pre></div>
 
 <p>where <code>GoogleProjectID</code> corresponds to the ID of the Google project you created in the Google Developer console.</p>
+</li>
+<li>
+<p>You can also enable bookmark support (user will be able to bookmark some content. You can then create a view with all the bookmarked content): </p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">if</span>(<span class="pl-c1">window</span>.<span class="pl-smi">cordova</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-c1">window</span>.<span class="pl-smi">cordova</span>.<span class="pl-c1">plugins</span>) {
+<span class="pl-c">//Enable bookmark support</span>
+<span class="pl-smi">cordova</span>.<span class="pl-c1">plugins</span>.<span class="pl-smi">PixLive</span>.<span class="pl-en">setBookmarkSupport</span>(<span class="pl-c1">true</span>);
+}</pre></div>
 </li>
 <li>
 <p>Add an Augmented Reality view in one of your Ionic views. Note that content inserted within the view will be displayed on top of the AR camera view.</p>
@@ -93,7 +101,7 @@
 </ul>
 
 <h2>
-<a id="synchronizing-content-from-pixlive-maker" class="anchor" href="#synchronizing-content-from-pixlive-maker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Synchronizing content from PixLive Maker</h2>
+<a id="synchronizing-content-from-pixlive-maker" class="anchor" href="#synchronizing-content-from-pixlive-maker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synchronizing content from PixLive Maker</h2>
 
 <p>PixLive Maker is a platform that allows anyone to create content for your app embeding PixLive SDK.</p>
 
@@ -120,7 +128,7 @@
 });</pre></div>
 
 <h2>
-<a id="directives-for-events" class="anchor" href="#directives-for-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Directives for events</h2>
+<a id="directives-for-events" class="anchor" href="#directives-for-events" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Directives for events</h2>
 
 <p>The following directives can be used <strong>as attribute</strong> on any elements to get the associated events from the PixLive SDK:</p>
 
@@ -148,6 +156,14 @@
 <p>This will call the <code>contextEnter</code> on the controller linked with the view when an image or a iBeacon is detected. The context ID is passed as a parameter to the contextEnter method.</p>
 
 <p>See the directives' doc for more information.</p>
+
+<h2>
+<a id="how-to-build" class="anchor" href="#how-to-build" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to build</h2>
+
+<pre><code>npm install -g grunt-cli
+npm install
+grunt
+</code></pre>
       </section>
     </div>
     <footer>
