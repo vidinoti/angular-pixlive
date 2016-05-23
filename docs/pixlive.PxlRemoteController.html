@@ -1,210 +1,2 @@
-<!doctype html>
-<html>
-  <head>
-    <title>JSDoc: PxlRemoteController</title>
-    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css">
-    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" rel="stylesheet" type="text/css">
-    <link href="css/custom.css" type="text/css" rel="stylesheet">
-    <script src="js/prettify.js"></script>
-    <script src="js/angular.min.js"></script>
-  </head>
-  <body ng-app="">
-    <nav>
-      <h2><a href="index.html">Index</a></h2>
-      <ul class="module">
-        <!-- pixlive -->
-        <h3>
-          <a href="" ng-click="modulepixlive = !modulepixlive">
-            module: pixlive
-          </a>
-          <i ng-cloak="" ng-show="modulepixlive">+</i>
-        </h3>
-        <li id="pixlive" ng-hide="modulepixlive">
-          <ul class="group">
-            <h3>
-              <a href="" ng-click="pixliveundefined = !pixliveundefined">
-                undefined
-              </a>
-              <i ng-cloak="" ng-show="pixliveundefined">+</i>
-            </h3>
-            <ul ng-hide="pixliveundefined">
-              <li>
-                <a href="pixlive.Context.html">Context</a>
-              </li>
-            </ul>
-          </ul><ul class="group">
-            <h3>
-              <a href="" ng-click="pixlivedirective = !pixlivedirective">
-                directive
-              </a>
-              <i ng-cloak="" ng-show="pixlivedirective">+</i>
-            </h3>
-            <ul ng-hide="pixlivedirective">
-              <li>
-                <a href="pixlive.pxlAnnotationsHide.html">pxlAnnotationsHide</a>
-              </li><li>
-                <a href="pixlive.pxlAnnotationsPresent.html">pxlAnnotationsPresent</a>
-              </li><li>
-                <a href="pixlive.pxlCodeRecognize.html">pxlCodeRecognize</a>
-              </li><li>
-                <a href="pixlive.pxlContextEnter.html">pxlContextEnter</a>
-              </li><li>
-                <a href="pixlive.pxlContextExit.html">pxlContextExit</a>
-              </li><li>
-                <a href="pixlive.pxlSensorTriggered.html">pxlSensorTriggered</a>
-              </li><li>
-                <a href="pixlive.pxlSensorUntriggered.html">pxlSensorUntriggered</a>
-              </li><li>
-                <a href="pixlive.pxlSensorUpdate.html">pxlSensorUpdate</a>
-              </li><li>
-                <a href="pixlive.pxlSynchronizationRequired.html">pxlSynchronizationRequired</a>
-              </li><li>
-                <a href="pixlive.pxlView.html">pxlView</a>
-              </li>
-            </ul>
-          </ul><ul class="group">
-            <h3>
-              <a href="" ng-click="pixliveservice = !pixliveservice">
-                service
-              </a>
-              <i ng-cloak="" ng-show="pixliveservice">+</i>
-            </h3>
-            <ul ng-hide="pixliveservice">
-              <li>
-                <a href="pixlive.PxlController.html">PxlController</a>
-              </li><li>
-                <a href="pixlive.PxlEventService.html">PxlEventService</a>
-              </li><li>
-                <a href="pixlive.PxlRemoteController.html">PxlRemoteController</a>
-              </li>
-            </ul>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-    <div id="content" class="page-wrap">
-      <h3 style="float:right; color:#ccc">
-        Angular service
-      </h3>
-      <h1 class="title">
-        PxlRemoteController
-        <a class="name-link signature-attributes" href="source/pixlive.PxlRemoteController.html#line14">source</a>
-      </h1>
-      <div id="main" class="big-container">
-        <!-- source code html -->
-        <!-- index.html -->
-        <!-- class files -->
-        <div>
-          <div><div class="container-overview">
-      <dt></dt>
-      <dd>
-        <div class="description">
-          <p>Manage and trigger PixLive Maker content synchronization with the app.</p>
-        </div>
-        <div class="details"></div>
-        <div>
-          <h5>Dependencies:</h5>
-          <table class="params">
-            <thead>
-              <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="name" nowrap="">$ionicPlatform</td>
-                <td class="type"><span class="param-type">
-                  service
-                </span></td>
-                <td class="description last"><p>The Ionic Platform helper</p></td>
-              </tr><tr>
-                <td class="name" nowrap="">$q</td>
-                <td class="type"><span class="param-type">
-                  service
-                </span></td>
-                <td class="description last"><p>Angular promise service</p></td>
-              </tr><tr>
-                <td class="name" nowrap="">PxlEventService</td>
-                <td class="type"><span class="param-type">
-                  service
-                </span></td>
-                <td class="description last"><p>PixLive SDK Event service</p></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </dd>
-    </div>
-    <section>
-      <div class="functions">
-        <h3 class="subsection-title">Methods</h3>
-        <dl>
-          <dt>
-            <a href="source/pixlive.PxlRemoteController.html#line44" class="name-link">
-              <h4 class="name">
-                synchronize
-                <span class="signature">(tags)</span>
-                <span class="type-signature">
-                  -&gt; Promise
-                </span>
-              </h4>
-            </a>
-          </dt>
-          <dd>
-            <div class="description">
-              <p>Start an asynchronous content synchronization with PixLive Maker backend</p>
-<p><strong>Warning</strong>: Only one synchronization can be started at a time.</p>
-            </div>
-            <div>
-              <h5>Parameters:</h5>
-              <table class="params">
-                <thead>
-                  <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="name">tags</td>
-                    <td class="type"><span class="param-type">
-                      Array.&lt;string>
-                    </span></td>
-                    <td class="description last"><p>The array of tags to start the synchronization with. Pass an empty array for synchronizing your app with all the available content.</p></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div>
-              <h5>Returns:</h5>
-              <table class="params">
-                <thead>
-                  <tr><th>Type</th><th class="last">Description</th></tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="type"><span class="param-type">
-                      Promise
-                    </span></td>
-                    <td class="description last"><p>The Angular promise that can be used for checking asynchronously the result of the call.</p></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </dd>
-        </dl>
-      </div>
-    </section></div>
-        </div>
-      </div>
-      <footer style="clear:both">
-        Documentation generated by
-        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
-        using
-        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>
-      </footer>
-    </div>
-    <!--%= prettyJson %-->
-    <script>
-      prettyPrint();
-      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
-      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
-    </script>
-  </body>
-</html>
+<!doctype html><html>  <head>    <meta charset="utf-8">    <title>JSDoc: PxlRemoteController</title>    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css">    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" rel="stylesheet" type="text/css">    <link href="css/custom.css" type="text/css" rel="stylesheet">    <script src="js/prettify.js"></script>    <script src="js/angular.min.js"></script>  </head>  <body ng-app="">    <nav>      <h2><a href="index.html">Index</a></h2>      <ul class="module">        <!-- pixlive -->        <h3>          <a href="" ng-click="modulepixlive = !modulepixlive">            module: pixlive          </a>          <i ng-cloak="" ng-show="modulepixlive">+</i>        </h3>        <li id="pixlive" ng-hide="modulepixlive">          <ul class="group">            <h3>              <a href="" ng-click="pixliveundefined = !pixliveundefined">                undefined              </a>              <i ng-cloak="" ng-show="pixliveundefined">+</i>            </h3>            <ul ng-hide="pixliveundefined">              <li>                <a href="pixlive.Context.html">Context</a>              </li>            </ul>          </ul><ul class="group">            <h3>              <a href="" ng-click="pixlivedirective = !pixlivedirective">                directive              </a>              <i ng-cloak="" ng-show="pixlivedirective">+</i>            </h3>            <ul ng-hide="pixlivedirective">              <li>                <a href="pixlive.pxlAnnotationsHide.html">pxlAnnotationsHide</a>              </li><li>                <a href="pixlive.pxlAnnotationsPresent.html">pxlAnnotationsPresent</a>              </li><li>                <a href="pixlive.pxlCodeRecognize.html">pxlCodeRecognize</a>              </li><li>                <a href="pixlive.pxlContextEnter.html">pxlContextEnter</a>              </li><li>                <a href="pixlive.pxlContextExit.html">pxlContextExit</a>              </li><li>                <a href="pixlive.pxlSensorTriggered.html">pxlSensorTriggered</a>              </li><li>                <a href="pixlive.pxlSensorUntriggered.html">pxlSensorUntriggered</a>              </li><li>                <a href="pixlive.pxlSensorUpdate.html">pxlSensorUpdate</a>              </li><li>                <a href="pixlive.pxlSynchronizationRequired.html">pxlSynchronizationRequired</a>              </li><li>                <a href="pixlive.pxlView.html">pxlView</a>              </li>            </ul>          </ul><ul class="group">            <h3>              <a href="" ng-click="pixliveservice = !pixliveservice">                service              </a>              <i ng-cloak="" ng-show="pixliveservice">+</i>            </h3>            <ul ng-hide="pixliveservice">              <li>                <a href="pixlive.PxlController.html">PxlController</a>              </li><li>                <a href="pixlive.PxlEventService.html">PxlEventService</a>              </li><li>                <a href="pixlive.PxlRemoteController.html">PxlRemoteController</a>              </li>            </ul>          </ul>        </li>      </ul>    </nav>    <div id="content" class="page-wrap">      <h3 style="float:right; color:#ccc">        Angular service      </h3>      <h1 class="title">        PxlRemoteController        <a class="name-link signature-attributes" href="source/pixlive.PxlRemoteController.html#line14">source</a>      </h1>      <div id="main" class="big-container">        <!-- source code html -->        <!-- index.html -->        <!-- class files -->        <div>          <div><div class="container-overview">  <ul class="chips">  </ul>  <div class="clearfix"></div>  <div class="description">    <p>Manage and trigger PixLive Maker content synchronization with the app.</p>  </div>  <div class="details"></div>  <div>    <h5>Parameters</h5>    <table class="params">      <thead>        <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>      </thead>      <tbody>        <tr>          <td class="name" nowrap="">            <a id="$ionicPlatform"></a>            $ionicPlatform          </td>          <td class="type"><span class="param-type">            <a href="service.html">service</a>          </span></td>          <td class="description last">            <span>              <p>The Ionic Platform helper</p>            </span>          </td>        </tr><tr>          <td class="name" nowrap="">            <a id="$q"></a>            $q          </td>          <td class="type"><span class="param-type">            <a href="service.html">service</a>          </span></td>          <td class="description last">            <span>              <p>Angular promise service</p>            </span>          </td>        </tr><tr>          <td class="name" nowrap="">            <a id="PxlEventService"></a>            PxlEventService          </td>          <td class="type"><span class="param-type">            <a href="service.html">service</a>          </span></td>          <td class="description last">            <span>              <p>PixLive SDK Event service</p>            </span>          </td>        </tr>      </tbody>    </table>  </div></div><div class="functions">  <h3 class="subsection-title">Methods</h3>  <dl>    <dt>      <a href="source/pixlive.PxlRemoteController.html#line44" class="name-link" id="synchronize">        <h4 class="name">          synchronize          <span class="signature">(tags)</span>          <span class="type-signature">            -&gt; Promise          </span>        </h4>      </a>    </dt>    <dd>      <div class="description">        <span>          <p>Start an asynchronous content synchronization with PixLive Maker backend</p>
+<p><strong>Warning</strong>: Only one synchronization can be started at a time.</p>        </span>      </div>      <div>        <h5>Parameters</h5>        <table class="params">          <thead>            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>          </thead>          <tbody>            <tr>              <td class="name">tags</td>              <td class="type"><span class="param-type">                string[]              </span></td>              <td class="description last">                <span>                  <p>The array of tags to start the synchronization with. Pass an empty array for synchronizing your app with all the available content.</p>                </span>              </td>            </tr>          </tbody>        </table>      </div>      <div>        <h5>Returns</h5>        <table class="params">          <thead>            <tr><th>Type</th><th class="last">Description</th></tr>          </thead>          <tbody>            <tr>              <td class="type">                <span class="param-type">                  <a href="Promise.html">Promise</a>                </span>              </td>              <td class="description last">                <span>                  <p>The Angular promise that can be used for checking asynchronously the result of the call.</p>                </span>              </td>            </tr>          </tbody>        </table>      </div>    </dd>  </dl></div></div>        </div>      </div>      <footer style="clear:both">        Documentation generated by        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>        using        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>      </footer>    </div>    <!--%= prettyJson %-->    <script>      prettyPrint();      var lineNo = window.location.hash.match(/#line([0-9]+)$/);      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();    </script>  </body></html>
