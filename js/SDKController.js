@@ -107,6 +107,11 @@ pixliveModule
 
                 /**
                  * Asynchronously return the list of contexts that have been bookmarked.
+                 *
+                 * When bookmark support has been enabled (by calling cordova.plugins.PixLive.setBookmarkSupport(true)), 
+                 * a bookmark button is displayed on fullscreen content such as web pages. Clicking it will mark the content as 
+                 * bookmarked. The content that have been bookmarked can be retrieved using this method.
+                 * You can also add and remove bookmarks programatically using the {@link Context#addBookmark} / {@link Context#removeBookmark} method
                  * 
                  * See {@link Context} for the description of the Context class.
                  * 
