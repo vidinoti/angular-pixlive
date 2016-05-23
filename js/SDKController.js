@@ -79,7 +79,7 @@ pixliveModule
                 /**
                  * Asynchronously return the list of contexts that is available within the app (i.e. the ones that have been synchronized.)
                  * 
-                 * See {@link Context} for the description of the Context class.
+                 * See {@link pixlive.Context} for the description of the Context class.
                  * 
                  * @memberof PxlController
                  *
@@ -111,9 +111,9 @@ pixliveModule
                  * When bookmark support has been enabled (by calling cordova.plugins.PixLive.setBookmarkSupport(true)), 
                  * a bookmark button is displayed on fullscreen content such as web pages. Clicking it will mark the content as 
                  * bookmarked. The content that have been bookmarked can be retrieved using this method.
-                 * You can also add and remove bookmarks programatically using the {@link Context#addBookmark} / {@link Context#removeBookmark} method
+                 * You can also add and remove bookmarks programatically using the {@link pixlive.PxlController#addBookmark} / {@link pixlive.PxlController#removeBookmark} method
                  * 
-                 * See {@link Context} for the description of the Context class.
+                 * See {@link pixlive.Context} for the description of the Context class.
                  * 
                  * @memberof PxlController
                  *
@@ -141,7 +141,7 @@ pixliveModule
                  * Add a new bookmark for a given context. The context corresponding to the contextId
                  * will be added to the bookmark list.
                  * 
-                 * @param {string} the ID of the context to add to the bookmark list
+                 * @param {string} contextId the ID (from the {@link pixlive.Context#contextId } property of the Context object) of the context to add to the bookmark list
                  * 
                  * @memberof PxlController
                  */
@@ -156,7 +156,7 @@ pixliveModule
                 /**
                  * Remove a context from the bookmark list.
                  * 
-                 * @param {string} the ID of the context to remove from the bookmark list
+                 * @param {string} contextId the ID (from the {@link pixlive.Context#contextId } property of the Context object) of the context to remove from the bookmark list
                  * 
                  * @memberof PxlController
                  */
