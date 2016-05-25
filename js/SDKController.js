@@ -193,12 +193,6 @@ pixliveModule
                         }
                     });
                     return deferred.promise;
-
-                    $ionicPlatform.ready(function () {
-                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
-                            window.cordova.plugins.PixLive.removeBookmark(contextId);
-                        }
-                    });
                 }
 
             };
