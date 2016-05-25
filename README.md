@@ -36,12 +36,22 @@ angular.module('myApp', ['ionic', 'myApp.controllers', 'myApp.services', 'pixliv
 
   ```js
 if(window.cordova && window.cordova.plugins) {
-  //Init PixLive SDK
-  cordova.plugins.PixLive.setNotificationsSupport(true,'GoogleProjectID');
+    //Enable notifications
+    cordova.plugins.PixLive.setNotificationsSupport(true,'GoogleProjectID');
 }
   ```
   
   where `GoogleProjectID` corresponds to the ID of the Google project you created in the Google Developer console.
+
+* You can also enable bookmark support (user will be able to bookmark some content. You can then create a view with all the bookmarked content): 
+
+  ```js
+if(window.cordova && window.cordova.plugins) {
+    //Enable bookmark support
+    cordova.plugins.PixLive.setBookmarkSupport(true);
+}
+  ```
+
 * Add an Augmented Reality view in one of your Ionic views. Note that content inserted within the view will be displayed on top of the AR camera view.
   
   ```html

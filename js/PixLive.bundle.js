@@ -237,7 +237,7 @@ pixliveModule
                     $delegate.retain = function() {
                         var args = [].slice.call(arguments);
 
-                        // Call the original with the output prepended with formatted timestamp
+                        // Call the original method
                         retainFn.apply(null, args)
 
                         $delegate.addBackdropHolds();
@@ -246,7 +246,7 @@ pixliveModule
                     $delegate.release = function() {
                         var args = [].slice.call(arguments);
 
-                        // Call the original with the output prepended with formatted timestamp
+                        // Call the original method
                         releaseFn.apply(null, args)
 
                         $delegate.removeBackdropHolds();
@@ -254,6 +254,66 @@ pixliveModule
 
                     $delegate.isDisplayed = function() {
                         return $delegate.backdropHolds>0;
+                    };
+
+                    return $delegate;
+                }
+            ]);
+        }
+    ]).config(["$provide",
+        function($provide) {
+            $provide.decorator('$ionicModal', ["$delegate","$q",
+                function($delegate,$q) {
+                    // Save the original $log.show()
+                    var fromTemplate = $delegate.fromTemplate;
+                    var fromTemplateUrl = $delegate.fromTemplateUrl;
+         
+                    var overrideShowHide = function (ret) {
+                        // Save old methods
+                        ret.showOld = ret.show;
+                        ret.hideOld = ret.hide;
+
+                        ret.show=function() {
+                            ionic.trigger('transfer.shown', {
+                                target: window
+                            });
+                            var args2 = [].slice.call(arguments);
+     
+                            return this.showOld.apply(this, args2);
+                        };
+
+                        ret.hide=function() {
+                            ionic.trigger('transfer.hidden', {
+                                target: window
+                            });
+                            var args2 = [].slice.call(arguments);
+
+                            return this.hideOld.apply(this, args2);
+                        };
+                    };
+
+                    $delegate.fromTemplate = function() {
+                        var args = [].slice.call(arguments);
+
+                        var ret = fromTemplate.apply(null, args);
+
+                        overrideShowHide(ret);
+
+                        return ret;
+                    };
+
+                    $delegate.fromTemplateUrl = function() {
+                        var args = [].slice.call(arguments);
+                        var deferred = $q.defer();
+
+                        fromTemplateUrl.apply(null, args).then(function(modal) {
+                            overrideShowHide(modal);
+                            deferred.resolve(modal);
+                        }, function(err) {
+                            deferred.reject(err);
+                        });
+
+                        return deferred.promise;
                     };
 
                     return $delegate;
@@ -417,7 +477,7 @@ pixliveModule
                 /**
                  * Asynchronously return the list of contexts that is available within the app (i.e. the ones that have been synchronized.)
                  * 
-                 * See {@link Context} for the description of the Context class.
+                 * See {@link pixlive.Context} for the description of the Context class.
                  * 
                  * @memberof PxlController
                  *
@@ -440,6 +500,96 @@ pixliveModule
                         }
                     });
 
+                    return deferred.promise;
+                },
+
+                /**
+                 * Asynchronously return the list of contexts that have been bookmarked.
+                 *
+                 * When bookmark support has been enabled (by calling cordova.plugins.PixLive.setBookmarkSupport(true)), 
+                 * a bookmark button is displayed on fullscreen content such as web pages. Clicking it will mark the content as 
+                 * bookmarked. The content that have been bookmarked can be retrieved using this method.
+                 * You can also add and remove bookmarks programatically using the {@link pixlive.PxlController#addBookmark} / {@link pixlive.PxlController#removeBookmark} method
+                 * 
+                 * See {@link pixlive.Context} for the description of the Context class.
+                 * 
+                 * @memberof PxlController
+                 *
+                 * @returns {Promise} An Angular Promise where the success 
+                 *      method will be called with an `Array<Context>` 
+                 *      argument corresponding to the context/content that have been bookmarked. 
+                 */
+                getBookmarks: function() {
+                    var deferred = $q.defer();
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.getBookmarks(function(list) {
+                                deferred.resolve(list);
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
+                    return deferred.promise;
+                },
+
+                /**
+                 * Add a new bookmark for a given context. The context corresponding to the contextId
+                 * will be added to the bookmark list.
+                 * 
+                 * @param {string} contextId the ID (from the {@link pixlive.Context#contextId } property of the Context object) of the context to add to the bookmark list
+                 * 
+                 * @memberof PxlController
+                 */
+                addBookmark: function(contextId) {
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.addBookmark(contextId);
+                        }
+                    });
+                },
+
+                /**
+                 * Remove a context from the bookmark list.
+                 * 
+                 * @param {string} contextId the ID (from the {@link pixlive.Context#contextId } property of the Context object) of the context to remove from the bookmark list
+                 * 
+                 * @memberof PxlController
+                 */
+                removeBookmark: function(contextId) {
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.removeBookmark(contextId);
+                        }
+                    });
+                },
+
+                /**
+                 * Asynchronously returns true or false depending if the context identifier by contextId (its ID) has been bookmarked or not.
+                 * 
+                 * @param {string} contextId the ID (from the {@link pixlive.Context#contextId } property of the Context object) of the context to check
+                 *
+                 * @returns {Promise} An Angular Promise where the success 
+                 *      method will be called with an `boolean` 
+                 *      argument indicating if the context has been bookmarked (true) or not (false)
+                 * 
+                 * @memberof PxlController
+                 */
+                isBookmarked: function(contextId) {
+                    var deferred = $q.defer();
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.isBookmarked(contextId, function(bookmarked) {
+                                deferred.resolve(bookmarked);
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
                     return deferred.promise;
                 }
             };

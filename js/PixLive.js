@@ -228,7 +228,7 @@ pixliveModule
                     $delegate.retain = function() {
                         var args = [].slice.call(arguments);
 
-                        // Call the original with the output prepended with formatted timestamp
+                        // Call the original method
                         retainFn.apply(null, args)
 
                         $delegate.addBackdropHolds();
@@ -237,7 +237,7 @@ pixliveModule
                     $delegate.release = function() {
                         var args = [].slice.call(arguments);
 
-                        // Call the original with the output prepended with formatted timestamp
+                        // Call the original method
                         releaseFn.apply(null, args)
 
                         $delegate.removeBackdropHolds();
@@ -245,6 +245,66 @@ pixliveModule
 
                     $delegate.isDisplayed = function() {
                         return $delegate.backdropHolds>0;
+                    };
+
+                    return $delegate;
+                }
+            ]);
+        }
+    ]).config(["$provide",
+        function($provide) {
+            $provide.decorator('$ionicModal', ["$delegate","$q",
+                function($delegate,$q) {
+                    // Save the original $log.show()
+                    var fromTemplate = $delegate.fromTemplate;
+                    var fromTemplateUrl = $delegate.fromTemplateUrl;
+         
+                    var overrideShowHide = function (ret) {
+                        // Save old methods
+                        ret.showOld = ret.show;
+                        ret.hideOld = ret.hide;
+
+                        ret.show=function() {
+                            ionic.trigger('transfer.shown', {
+                                target: window
+                            });
+                            var args2 = [].slice.call(arguments);
+     
+                            return this.showOld.apply(this, args2);
+                        };
+
+                        ret.hide=function() {
+                            ionic.trigger('transfer.hidden', {
+                                target: window
+                            });
+                            var args2 = [].slice.call(arguments);
+
+                            return this.hideOld.apply(this, args2);
+                        };
+                    };
+
+                    $delegate.fromTemplate = function() {
+                        var args = [].slice.call(arguments);
+
+                        var ret = fromTemplate.apply(null, args);
+
+                        overrideShowHide(ret);
+
+                        return ret;
+                    };
+
+                    $delegate.fromTemplateUrl = function() {
+                        var args = [].slice.call(arguments);
+                        var deferred = $q.defer();
+
+                        fromTemplateUrl.apply(null, args).then(function(modal) {
+                            overrideShowHide(modal);
+                            deferred.resolve(modal);
+                        }, function(err) {
+                            deferred.reject(err);
+                        });
+
+                        return deferred.promise;
                     };
 
                     return $delegate;
