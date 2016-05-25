@@ -166,7 +166,7 @@ pixliveModule
                             window.cordova.plugins.PixLive.removeBookmark(contextId);
                         }
                     });
-                }
+                },
 
                 /**
                  * Asynchronously returns true or false depending if the context identifier by contextId (its ID) has been bookmarked or not.
