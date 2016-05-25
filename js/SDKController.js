@@ -168,6 +168,39 @@ pixliveModule
                     });
                 }
 
+                /**
+                 * Asynchronously returns true or false depending if the context identifier by contextId (its ID) has been bookmarked or not.
+                 * 
+                 * @param {string} contextId the ID (from the {@link pixlive.Context#contextId } property of the Context object) of the context to check
+                 *
+                 * @returns {Promise} An Angular Promise where the success 
+                 *      method will be called with an `boolean` 
+                 *      argument indicating if the context has been bookmarked (true) or not (false)
+                 * 
+                 * @memberof PxlController
+                 */
+                isBookmarked: function(contextId) {
+                    var deferred = $q.defer();
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.isBookmarked(contextId, function(bookmarked) {
+                                deferred.resolve(bookmarked);
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
+                    return deferred.promise;
+
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.removeBookmark(contextId);
+                        }
+                    });
+                }
+
             };
         }
     ]);
