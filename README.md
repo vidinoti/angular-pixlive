@@ -105,6 +105,7 @@ The following directives can be used **as attribute** on any elements to get the
 * pxlSensorTriggered
 * pxlSensorUpdate
 * pxlSensorUntriggered
+* pxlEventFromContent
 
 It can be used for example as follow in your HTML template:
 

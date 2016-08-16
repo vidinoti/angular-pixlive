@@ -760,6 +760,46 @@ pixliveModule
 
     /**
      * @ngdoc directive
+     * @name eventFromContent
+     * @element Attribute
+     * @memberof pixlive
+     * @param {service} PxlEventService PixLive SDK Event service
+     * @restrict A
+     *
+     * @description
+     * Expression that is evaluated when an event is received from the content (PixliveJS).
+     * To dispatch an event from PixLiveJS use: device.dispatchEventInApp(eventName, eventParams);
+     *
+     * event.eventName The name of the event
+     * event.eventParams The parameters of the event
+
+     * @example
+     * <div pxl-context-enter="eventFromContent(eventName,eventParams)">
+     *  ...
+     * </div>
+     */
+    .directive('pxlEventFromContent', [
+        'PxlEventService',
+        function(PxlEventService) {
+            return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    var listener = function(event) {
+                        scope.$apply(function(self) {
+                            self[attrs.pxlEventFromContent](event.eventName,event.eventParams);
+                        });
+                    };
+                    PxlEventService.addListener('eventFromContent',listener);
+                    element.bind('$destroy', function() {
+                        PxlEventService.removeListener('eventFromContent',listener);
+                    });
+                }
+            };
+        }
+    ])
+
+    /**
+     * @ngdoc directive
      * @name pxlSensorTriggered
      * @element Attribute
      * @memberof pixlive
