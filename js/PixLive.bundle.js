@@ -591,7 +591,22 @@ pixliveModule
                         }
                     });
                     return deferred.promise;
-                }
+                },
+
+                /**
+                 * Will open an url with the PixLive SDK internal browser
+                 * 
+                 * @param {string} url - The url
+                 *
+                 * @memberof PxlController
+                 */
+                openURLInInternalBrowser: function(url) {
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.openURLInInternalBrowser(url);
+                        }
+                    });
+                }               
             };
         }
     ]);
