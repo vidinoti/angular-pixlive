@@ -59,7 +59,7 @@ pixliveModule
 
                                    
                 /**
-                 * Class returned by the getContexts method of the PxlController 
+                 * Class returned by the getContext method of the PxlController 
                  * service that describe a single context available within the app.
                  * 
                  * @class
@@ -94,6 +94,37 @@ pixliveModule
                         if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
                             window.cordova.plugins.PixLive.getContexts(function(list) {
                                 deferred.resolve(list);
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
+
+                    return deferred.promise;
+                },
+
+                /**
+                 * Asynchronously return the context with the given contextId if this context has been synchronized.
+                 * 
+                 * See {@link pixlive.Context} for the description of the Context class.
+                 * 
+                 * @param {string} contextId the ID (from the {@link pixlive.Context#contextId } property of the Context object) of the context to add to the bookmark list
+                 * 
+                 * @memberof PxlController
+                 *
+                 * @returns {Promise} An Angular Promise where the success 
+                 *      method will be called with a `Context` 
+                 *      argument corresponding to the context/content with the given contextId 
+                 */
+                getContext: function(contextId) {
+                    var deferred = $q.defer();
+
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.getContext(contextId,function(context) {
+                                deferred.resolve(context);
                             }, function() {
                                 deferred.reject();
                             });
