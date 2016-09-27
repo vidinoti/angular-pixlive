@@ -535,6 +535,100 @@ pixliveModule
                 },
 
                 /**
+                 * Asynchronously return the list of GPS points in the bounding box specified by its lower left and uper right corner
+                 *
+                 * See {@link pixlive.GPSPoint} for the description of the Context class.
+                 *
+                 * @memberof PxlController
+                 *
+                 * @param {Number} lat1 latitude of point 1
+                 * @param {Number} lon1 longitude of point 1
+                 * @param {Number} lat2 latitude of point 2
+                 * @param {Number} lon2 longitude of point 2
+                 *
+                 * @returns {Promise} An Angular Promise where the success 
+                 *      method will be called with a Number argument
+                 *      corresponding to distance between the two GPS points
+                 */
+                computeDistanceBetweenGPSPoints: function(lat1, lon1, lat2, lon2) {
+                    var deferred = $q.defer();
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.computeDistanceBetweenGPSPoints(lat1, lon1, lat2, lon2, function(distance) {
+                                deferred.resolve(distance);
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
+                    return deferred.promise;
+                },
+
+                /**
+                 * Asynchronously return the list of nearby GPS points
+                 *
+                 * See {@link pixlive.GPSPoint} for the description of the Context class.
+                 *
+                 * @memberof PxlController
+                 *
+                 * @param {Number} myLat current latitude
+                 * @param {Number} myLon current longitude
+                 *
+                 * @returns {Promise} An Angular Promise where the success 
+                 *      method will be called with an `Array<GPSPoint>` 
+                 *      argument corresponding to nearby GPS points
+                 */
+                getNearbyGPSPoints: function(myLat, myLon) {
+                    var deferred = $q.defer();
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.getNearbyGPSPoints(myLat, myLon, function(list) {
+                                deferred.resolve(list);
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
+                    return deferred.promise;
+                },
+
+                /**
+                 * Asynchronously return the list of GPS points in the bounding box specified by its lower left and uper right corner
+                 *
+                 * See {@link pixlive.GPSPoint} for the description of the Context class.
+                 *
+                 * @memberof PxlController
+                 *
+                 * @param {Number} latitude of the lower left corner
+                 * @param {Number} longitude of the lower left corner
+                 * @param {Number} latitude of the uper right corner
+                 * @param {Number} longitude of the uper right corner
+                 *
+                 * @returns {Promise} An Angular Promise where the success 
+                 *      method will be called with an `Array<GPSPoint>` 
+                 *      argument corresponding to GPS points in the specified bounding box
+                 */
+                getGPSPointsInBoundingBox: function(minLat, minLon, maxLat, maxLon) {
+                    var deferred = $q.defer();
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.getGPSPointsInBoundingBox(minLat, minLon, maxLat, maxLon, function(list) {
+                                deferred.resolve(list);
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
+                    return deferred.promise;
+                },
+
+                /**
                  * Asynchronously return the list of contexts that have been bookmarked.
                  *
                  * When bookmark support has been enabled (by calling cordova.plugins.PixLive.setBookmarkSupport(true)), 

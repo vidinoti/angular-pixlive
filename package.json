@@ -1,6 +1,6 @@
 {
   "name": "angular-pixlive",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Plugin to use PixLive Augmented Reality toolkit the Angular way",
   "main": "js/PixLive.bundle.js",
   "scripts": {
