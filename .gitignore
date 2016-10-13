@@ -6,3 +6,4 @@ platforms/
 plugins/
 example/www/lib/
 build/
+bower_components/
