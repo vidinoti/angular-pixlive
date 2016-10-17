@@ -55,9 +55,61 @@ pixliveModule
 
                     return deferred.promise;
                 },
+                /**
+                 * Will show the list of "nearby" contents. It can be either geolocalized points (GPS points)
+                 * or beacons. If called with the coordinates (0, 0), a loading wheel (progress bar) will
+                 * be displayed for indicating that the position is being acquired. The list can then be
+                 * reloaded by calling the function PixLive.refreshNearbyList. If called 
+                 * 
+                 * @param {float} latitude - the current latitude
+                 * @param {float} longitude - the current longitude
+                 * @param {callback} success - success callback
+                 * @param {callback} error - error callback
+                 */
+                presentNearbyList: function(latitude, longitude) {
+                    var deferred = $q.defer();
 
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.presentNearbyList(latitude,longitude,function() {
+                                deferred.resolve();
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
 
-                                   
+                    return deferred.promise;
+                },
+                /**
+                 * If the list displaying the nearby GPS point is displayed, calling this function
+                 * will reload the nearby elements according to the new given coordinate.
+                 * The beacon list will be refreshed as well.
+                 * 
+                 * @param {float} latitude - the current latitude
+                 * @param {float} longitude - the current longitude
+                 * @param {callback} success - success callback
+                 * @param {callback} error - error callback
+                 */
+                refreshNearbyList: function(latitude, longitude) {
+                    var deferred = $q.defer();
+
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.refreshNearbyList(latitude,longitude,function() {
+                                deferred.resolve();
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
+
+                    return deferred.promise;
+                },               
                 /**
                  * Class returned by the getContext method of the PxlController 
                  * service that describe a single context available within the app.
