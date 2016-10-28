@@ -453,6 +453,7 @@ pixliveModule
 
                     return deferred.promise;
                 },
+
                 /**
                  * Will show the list of "nearby" contents. It can be either geolocalized points (GPS points)
                  * or beacons. If called with the coordinates (0, 0), a loading wheel (progress bar) will
@@ -461,26 +462,17 @@ pixliveModule
                  * 
                  * @param {float} latitude - the current latitude
                  * @param {float} longitude - the current longitude
-                 * @param {callback} success - success callback
-                 * @param {callback} error - error callback
                  */
                 presentNearbyList: function(latitude, longitude) {
                     var deferred = $q.defer();
 
                     $ionicPlatform.ready(function () {
                         if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
-                            window.cordova.plugins.PixLive.presentNearbyList(latitude,longitude,function() {
-                                deferred.resolve();
-                            }, function() {
-                                deferred.reject();
-                            });
-                        } else {
-                            deferred.resolve([]);
+                            window.cordova.plugins.PixLive.presentNearbyList(latitude,longitude);
                         }
                     });
-
-                    return deferred.promise;
                 },
+                
                 /**
                  * If the list displaying the nearby GPS point is displayed, calling this function
                  * will reload the nearby elements according to the new given coordinate.
@@ -488,26 +480,17 @@ pixliveModule
                  * 
                  * @param {float} latitude - the current latitude
                  * @param {float} longitude - the current longitude
-                 * @param {callback} success - success callback
-                 * @param {callback} error - error callback
                  */
                 refreshNearbyList: function(latitude, longitude) {
                     var deferred = $q.defer();
 
                     $ionicPlatform.ready(function () {
                         if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
-                            window.cordova.plugins.PixLive.refreshNearbyList(latitude,longitude,function() {
-                                deferred.resolve();
-                            }, function() {
-                                deferred.reject();
-                            });
-                        } else {
-                            deferred.resolve([]);
+                            window.cordova.plugins.PixLive.refreshNearbyList(latitude,longitude);
                         }
                     });
+                },
 
-                    return deferred.promise;
-                },               
                 /**
                  * Class returned by the getContext method of the PxlController 
                  * service that describe a single context available within the app.
@@ -585,11 +568,32 @@ pixliveModule
 
                     return deferred.promise;
                 },
-
+                /**
+                 * Return true if the app contain GPS points, false otherwise
+                 *
+                 * @memberof PxlController
+                 *
+                 * @returns {Promise} An Angular Promise where the success 
+                 *      method will be called with a `boolean` 
+                 *      argument indicating if the app contain GPS points (true) or not (false)
+                 */
+                isContainingGPSPoints: function() {
+                    var deferred = $q.defer();
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.isContainingGPSPoints(function(containingGPSPoints) {
+                                deferred.resolve(containingGPSPoints);
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
+                    return deferred.promise;
+                },
                 /**
                  * Asynchronously return the list of GPS points in the bounding box specified by its lower left and uper right corner
-                 *
-                 * See {@link pixlive.GPSPoint} for the description of the Context class.
                  *
                  * @memberof PxlController
                  *
@@ -621,7 +625,7 @@ pixliveModule
                 /**
                  * Asynchronously return the list of nearby GPS points
                  *
-                 * See {@link pixlive.GPSPoint} for the description of the Context class.
+                 * See {@link pixlive.GPSPoint} for the description of the GPSPoint class.
                  *
                  * @memberof PxlController
                  *
@@ -651,7 +655,7 @@ pixliveModule
                 /**
                  * Asynchronously return the list of GPS points in the bounding box specified by its lower left and uper right corner
                  *
-                 * See {@link pixlive.GPSPoint} for the description of the Context class.
+                 * See {@link pixlive.GPSPoint} for the description of the GPSPoint class.
                  *
                  * @memberof PxlController
                  *
