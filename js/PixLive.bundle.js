@@ -622,6 +622,34 @@ pixliveModule
                     return deferred.promise;
                 },
 
+
+                /**
+                 * Asynchronously return the list of contexts linked to nearby beacons
+                 * 
+                 * See {@link pixlive.Context} for the description of the Context class.
+                 * 
+                 * @memberof PxlController
+                 *
+                 * @returns {Promise} An Angular Promise where the success 
+                 *      method will be called with an `Array<Context>` 
+                 *      argument corresponding to the context/content linked to nearby beacons
+                 */
+                getNearbyBeacons: function() {
+                    var deferred = $q.defer();
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.getNearbyBeacons(function(list) {
+                                deferred.resolve(list);
+                            }, function() {
+                                deferred.reject();
+                            });
+                        } else {
+                            deferred.resolve([]);
+                        }
+                    });
+                    return deferred.promise;
+                },
+
                 /**
                  * Asynchronously return the list of nearby GPS points
                  *
