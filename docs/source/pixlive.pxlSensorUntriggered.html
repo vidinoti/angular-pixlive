@@ -1,4 +1,4 @@
-<!doctype html><html>  <head>    <meta charset="utf-8">    <base href="../">    <title>JSDoc: source : PixLiveEvent.js</title>    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css">    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" rel="stylesheet" type="text/css">    <link href="css/custom.css" type="text/css" rel="stylesheet">    <script src="js/prettify.js"></script>    <script src="js/angular.min.js"></script>  </head>  <body ng-app="">    <nav>      <h2><a href="index.html">Index</a></h2>      <ul class="module">        <!-- pixlive -->        <h3>          <a href="" ng-click="modulepixlive = !modulepixlive">            module: pixlive          </a>          <i ng-cloak="" ng-show="modulepixlive">+</i>        </h3>        <li id="pixlive" ng-hide="modulepixlive">          <ul class="group">            <h3>              <a href="" ng-click="pixliveundefined = !pixliveundefined">                undefined              </a>              <i ng-cloak="" ng-show="pixliveundefined">+</i>            </h3>            <ul ng-hide="pixliveundefined">              <li>                <a href="pixlive.Context.html">Context</a>              </li>            </ul>          </ul><ul class="group">            <h3>              <a href="" ng-click="pixlivedirective = !pixlivedirective">                directive              </a>              <i ng-cloak="" ng-show="pixlivedirective">+</i>            </h3>            <ul ng-hide="pixlivedirective">              <li>                <a href="pixlive.pxlAnnotationsHide.html">pxlAnnotationsHide</a>              </li><li>                <a href="pixlive.pxlAnnotationsPresent.html">pxlAnnotationsPresent</a>              </li><li>                <a href="pixlive.pxlCodeRecognize.html">pxlCodeRecognize</a>              </li><li>                <a href="pixlive.pxlContextEnter.html">pxlContextEnter</a>              </li><li>                <a href="pixlive.pxlContextExit.html">pxlContextExit</a>              </li><li>                <a href="pixlive.pxlSensorTriggered.html">pxlSensorTriggered</a>              </li><li>                <a href="pixlive.pxlSensorUntriggered.html">pxlSensorUntriggered</a>              </li><li>                <a href="pixlive.pxlSensorUpdate.html">pxlSensorUpdate</a>              </li><li>                <a href="pixlive.pxlSynchronizationRequired.html">pxlSynchronizationRequired</a>              </li><li>                <a href="pixlive.pxlView.html">pxlView</a>              </li>            </ul>          </ul><ul class="group">            <h3>              <a href="" ng-click="pixliveservice = !pixliveservice">                service              </a>              <i ng-cloak="" ng-show="pixliveservice">+</i>            </h3>            <ul ng-hide="pixliveservice">              <li>                <a href="pixlive.PxlController.html">PxlController</a>              </li><li>                <a href="pixlive.PxlEventService.html">PxlEventService</a>              </li><li>                <a href="pixlive.PxlRemoteController.html">PxlRemoteController</a>              </li>            </ul>          </ul>        </li>      </ul>    </nav>    <div id="content" class="page-wrap">      <h1 class="title">        source : PixLiveEvent.js      </h1>      <div id="main" class="big-container">        <!-- source code html -->        <article>          <pre class="prettyprint source linenums"><code>/*
+<!doctype html><html>  <head>    <meta charset="utf-8">    <base href="../">    <title>JSDoc: source : PixLiveEvent.js</title>    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css">    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,700" rel="stylesheet" type="text/css">    <link href="css/custom.css" type="text/css" rel="stylesheet">    <script src="js/prettify.js"></script>    <script src="js/angular.min.js"></script>  </head>  <body ng-app="">    <nav>      <h2><a href="index.html">Index</a></h2>      <ul class="module">        <!-- pixlive -->        <h3>          <a href="" ng-click="modulepixlive = !modulepixlive">            module: pixlive          </a>          <i ng-cloak="" ng-show="modulepixlive">+</i>        </h3>        <li id="pixlive" ng-hide="modulepixlive">          <ul class="group">            <h3>              <a href="" ng-click="pixliveundefined = !pixliveundefined">                undefined              </a>              <i ng-cloak="" ng-show="pixliveundefined">+</i>            </h3>            <ul ng-hide="pixliveundefined">              <li>                <a href="pixlive.Context.html">Context</a>              </li>            </ul>          </ul><ul class="group">            <h3>              <a href="" ng-click="pixlivedirective = !pixlivedirective">                directive              </a>              <i ng-cloak="" ng-show="pixlivedirective">+</i>            </h3>            <ul ng-hide="pixlivedirective">              <li>                <a href="pixlive.eventFromContent.html">eventFromContent</a>              </li><li>                <a href="pixlive.pxlAnnotationsHide.html">pxlAnnotationsHide</a>              </li><li>                <a href="pixlive.pxlAnnotationsPresent.html">pxlAnnotationsPresent</a>              </li><li>                <a href="pixlive.pxlCodeRecognize.html">pxlCodeRecognize</a>              </li><li>                <a href="pixlive.pxlContextEnter.html">pxlContextEnter</a>              </li><li>                <a href="pixlive.pxlContextExit.html">pxlContextExit</a>              </li><li>                <a href="pixlive.pxlSensorTriggered.html">pxlSensorTriggered</a>              </li><li>                <a href="pixlive.pxlSensorUntriggered.html">pxlSensorUntriggered</a>              </li><li>                <a href="pixlive.pxlSensorUpdate.html">pxlSensorUpdate</a>              </li><li>                <a href="pixlive.pxlSynchronizationRequired.html">pxlSynchronizationRequired</a>              </li><li>                <a href="pixlive.pxlView.html">pxlView</a>              </li>            </ul>          </ul><ul class="group">            <h3>              <a href="" ng-click="pixliveservice = !pixliveservice">                service              </a>              <i ng-cloak="" ng-show="pixliveservice">+</i>            </h3>            <ul ng-hide="pixliveservice">              <li>                <a href="pixlive.PxlController.html">PxlController</a>              </li><li>                <a href="pixlive.PxlEventService.html">PxlEventService</a>              </li><li>                <a href="pixlive.PxlRemoteController.html">PxlRemoteController</a>              </li>            </ul>          </ul>        </li>      </ul>    </nav>    <div id="content" class="page-wrap">      <h1 class="title">        source : PixLiveEvent.js      </h1>      <div id="main" class="big-container">        <!-- source code html -->        <article>          <pre class="prettyprint source linenums"><code>/*
  * angular-pixlive v1
  * (c) 2015-2016 Vidinoti https://vidinoti.com
  * License: MIT
@@ -141,6 +141,44 @@ pixliveModule
                     PxlEventService.addListener('exitContext',listener);
                     element.bind('$destroy', function() {
                         PxlEventService.removeListener('exitContext',listener);
+                    });
+                }
+            };
+        }
+    ])
+    /**
+     * @ngdoc directive
+     * @name eventFromContent
+     * @element Attribute
+     * @memberof pixlive
+     * @param {service} PxlEventService PixLive SDK Event service
+     * @restrict A
+     *
+     * @description
+     * Expression that is evaluated when an event is received from the content (PixliveJS).
+     * To dispatch an event from PixLiveJS use: device.dispatchEventInApp(eventName, eventParams);
+     *
+     * event.eventName The name of the event
+     * event.eventParams The parameters of the event
+     * @example
+     * &lt;div pxl-context-enter="eventFromContent(eventName,eventParams)">
+     *  ...
+     * &lt;/div>
+     */
+    .directive('pxlEventFromContent', [
+        'PxlEventService',
+        function(PxlEventService) {
+            return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    var listener = function(event) {
+                        scope.$apply(function(self) {
+                            self[attrs.pxlEventFromContent](event.eventName,event.eventParams);
+                        });
+                    };
+                    PxlEventService.addListener('eventFromContent',listener);
+                    element.bind('$destroy', function() {
+                        PxlEventService.removeListener('eventFromContent',listener);
                     });
                 }
             };
