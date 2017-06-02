@@ -815,7 +815,22 @@ pixliveModule
                             window.cordova.plugins.PixLive.openURLInInternalBrowser(url);
                         }
                     });
-                }               
+                },
+
+                /**
+                 * Sets the language that must be used for the online recognition.
+                 * 
+                 * @param {string} languageCode the language that must be used for the online recognition. It must be represented by a 2-char iso code like "en" or "fr"
+                 * 
+                 * @memberof PxlController
+                 */
+                setCloudRecognitionLanguage: function(languageCode) {
+                    $ionicPlatform.ready(function () {
+                        if(window.cordova && window.cordova.plugins && window.cordova.plugins.PixLive) {
+                            window.cordova.plugins.PixLive.setCloudRecognitionLanguage(languageCode);
+                        }
+                    });
+                }
             };
         }
     ]);
