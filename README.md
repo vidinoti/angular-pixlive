@@ -125,3 +125,12 @@ See the directives' doc for more information.
 
 Simply execute `grunt` for building the library.
 
+## How to contribute
+
+* `git clone https://github.com/vidinoti/angular-pixlive`
+* Edit the plugin as needed
+* Build the plugin with `grunt`
+* Update version number in `bower.json` and `package.json`
+* Commit and push the changes
+* Create a new release: In https://github.com/vidinoti/angular-pixlive -> Releases -> Draft a new Release -> Publish release
+* Publish the new release to npmjs: `npm publish` (use `npm login` if not already logged in)
